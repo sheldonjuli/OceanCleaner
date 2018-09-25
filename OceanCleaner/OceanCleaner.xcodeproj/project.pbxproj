@@ -14,6 +14,7 @@
 		2427553D215A991700FB7090 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2427553B215A991700FB7090 /* Main.storyboard */; };
 		2427553F215A991800FB7090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2427553E215A991800FB7090 /* Assets.xcassets */; };
 		24275542215A991800FB7090 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24275540215A991800FB7090 /* LaunchScreen.storyboard */; };
+		24275553215AA95200FB7090 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24275552215AA95200FB7090 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2427553E215A991800FB7090 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24275541215A991800FB7090 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24275543215A991800FB7090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24275552215AA95200FB7090 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4BFA4B8266A05762D794BDB1 /* Pods-OceanCleaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.debug.xcconfig"; sourceTree = "<group>"; };
 		EC90E8DCAD05DB8CF6BE193E /* Pods-OceanCleaner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.release.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24275553215AA95200FB7090 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +120,7 @@
 		8F6C8A203FCE895AEC27024B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24275552215AA95200FB7090 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
