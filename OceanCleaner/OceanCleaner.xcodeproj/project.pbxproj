@@ -15,6 +15,13 @@
 		2427553F215A991800FB7090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2427553E215A991800FB7090 /* Assets.xcassets */; };
 		24275542215A991800FB7090 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24275540215A991800FB7090 /* LaunchScreen.storyboard */; };
 		24275553215AA95200FB7090 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24275552215AA95200FB7090 /* StoreKit.framework */; };
+		24275555215AAAF300FB7090 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275554215AAAF300FB7090 /* Constants.swift */; };
+		24275557215AAB3300FB7090 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275556215AAB3300FB7090 /* MenuScene.swift */; };
+		24275559215AAB8D00FB7090 /* SpriteKitSceneBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275558215AAB8D00FB7090 /* SpriteKitSceneBackground.swift */; };
+		2427555B215AABD000FB7090 /* SpriteKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427555A215AABD000FB7090 /* SpriteKitButton.swift */; };
+		2427555E215AAC1800FB7090 /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427555D215AAC1800FB7090 /* SKNodeExtensions.swift */; };
+		24275560215AACF300FB7090 /* ScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427555F215AACF300FB7090 /* ScoreScene.swift */; };
+		24275562215AAD1D00FB7090 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275561215AAD1D00FB7090 /* Popup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +35,13 @@
 		24275541215A991800FB7090 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24275543215A991800FB7090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24275552215AA95200FB7090 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		24275554215AAAF300FB7090 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		24275556215AAB3300FB7090 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		24275558215AAB8D00FB7090 /* SpriteKitSceneBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitSceneBackground.swift; sourceTree = "<group>"; };
+		2427555A215AABD000FB7090 /* SpriteKitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitButton.swift; sourceTree = "<group>"; };
+		2427555D215AAC1800FB7090 /* SKNodeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
+		2427555F215AACF300FB7090 /* ScoreScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreScene.swift; sourceTree = "<group>"; };
+		24275561215AAD1D00FB7090 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		4BFA4B8266A05762D794BDB1 /* Pods-OceanCleaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.debug.xcconfig"; sourceTree = "<group>"; };
 		EC90E8DCAD05DB8CF6BE193E /* Pods-OceanCleaner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.release.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +100,8 @@
 		2427554A215A9A3400FB7090 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				24275554215AAAF300FB7090 /* Constants.swift */,
+				2427555D215AAC1800FB7090 /* SKNodeExtensions.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -95,6 +111,8 @@
 			children = (
 				24275533215A991700FB7090 /* GameScene.sks */,
 				24275537215A991700FB7090 /* GameScene.swift */,
+				24275556215AAB3300FB7090 /* MenuScene.swift */,
+				2427555F215AACF300FB7090 /* ScoreScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -102,6 +120,9 @@
 		2427554C215A9A6600FB7090 /* CustomNodes */ = {
 			isa = PBXGroup;
 			children = (
+				24275558215AAB8D00FB7090 /* SpriteKitSceneBackground.swift */,
+				2427555A215AABD000FB7090 /* SpriteKitButton.swift */,
+				24275561215AAD1D00FB7090 /* Popup.swift */,
 			);
 			path = CustomNodes;
 			sourceTree = "<group>";
@@ -234,7 +255,14 @@
 			files = (
 				24275538215A991700FB7090 /* GameScene.swift in Sources */,
 				2427553A215A991700FB7090 /* GameViewController.swift in Sources */,
+				24275562215AAD1D00FB7090 /* Popup.swift in Sources */,
+				24275557215AAB3300FB7090 /* MenuScene.swift in Sources */,
 				24275532215A991700FB7090 /* AppDelegate.swift in Sources */,
+				24275559215AAB8D00FB7090 /* SpriteKitSceneBackground.swift in Sources */,
+				2427555E215AAC1800FB7090 /* SKNodeExtensions.swift in Sources */,
+				24275560215AACF300FB7090 /* ScoreScene.swift in Sources */,
+				2427555B215AABD000FB7090 /* SpriteKitButton.swift in Sources */,
+				24275555215AAAF300FB7090 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
