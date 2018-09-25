@@ -21,7 +21,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        let gameSceneBackground = SpriteKitSceneBackground(bounds: view.bounds, backgroundImageName: ImageNames.gameSceneBackground)
+        let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
         addChild(gameSceneBackground)
         
         // Counts every second

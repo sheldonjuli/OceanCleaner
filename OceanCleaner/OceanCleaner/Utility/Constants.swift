@@ -55,6 +55,10 @@ struct InAppPurchases {
 
 extension SKView {
     
+    var sceneBackgroundPosition: CGPoint {
+        return CGPoint(x: bounds.midX, y: bounds.midY)
+    }
+    
     var startButtonPosition: CGPoint {
         return CGPoint(x: bounds.midX, y: bounds.midY * 0.8)
     }

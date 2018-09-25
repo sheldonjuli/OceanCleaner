@@ -26,7 +26,7 @@ class MenuScene: SKScene {
     
     func setupMenu(view: SKView) {
         
-        let menuSceneBackground = SpriteKitSceneBackground(bounds: view.bounds, backgroundImageName: ImageNames.menuSceneBackground)
+        let menuSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.menuSceneBackground)
         addChild(menuSceneBackground)
         
         let startButton = SpriteKitButton(buttonImage: ImageNames.startButton, action: goToGameScene, caseId: 0)
