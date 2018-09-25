@@ -26,6 +26,8 @@
 		2427553E215A991800FB7090 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24275541215A991800FB7090 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24275543215A991800FB7090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BFA4B8266A05762D794BDB1 /* Pods-OceanCleaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.debug.xcconfig"; sourceTree = "<group>"; };
+		EC90E8DCAD05DB8CF6BE193E /* Pods-OceanCleaner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.release.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,8 @@
 			children = (
 				24275530215A991700FB7090 /* OceanCleaner */,
 				2427552F215A991700FB7090 /* Products */,
+				EDA71639515B7531E2BD2B06 /* Pods */,
+				8F6C8A203FCE895AEC27024B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +114,22 @@
 			path = System;
 			sourceTree = "<group>";
 		};
+		8F6C8A203FCE895AEC27024B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDA71639515B7531E2BD2B06 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4BFA4B8266A05762D794BDB1 /* Pods-OceanCleaner.debug.xcconfig */,
+				EC90E8DCAD05DB8CF6BE193E /* Pods-OceanCleaner.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,6 +137,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24275546215A991800FB7090 /* Build configuration list for PBXNativeTarget "OceanCleaner" */;
 			buildPhases = (
+				FCD027FD1000D737A4D28FBD /* [CP] Check Pods Manifest.lock */,
 				2427552A215A991700FB7090 /* Sources */,
 				2427552B215A991700FB7090 /* Frameworks */,
 				2427552C215A991700FB7090 /* Resources */,
@@ -176,6 +197,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FCD027FD1000D737A4D28FBD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OceanCleaner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2427552A215A991700FB7090 /* Sources */ = {
@@ -328,11 +374,12 @@
 		};
 		24275547215A991800FB7090 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BFA4B8266A05762D794BDB1 /* Pods-OceanCleaner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7D766PLD8;
-				INFOPLIST_FILE = OceanCleaner/Info.plist;
+				INFOPLIST_FILE = OceanCleaner/System/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -347,11 +394,12 @@
 		};
 		24275548215A991800FB7090 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC90E8DCAD05DB8CF6BE193E /* Pods-OceanCleaner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X7D766PLD8;
-				INFOPLIST_FILE = OceanCleaner/Info.plist;
+				INFOPLIST_FILE = OceanCleaner/System/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
