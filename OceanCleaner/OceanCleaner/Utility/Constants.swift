@@ -67,7 +67,7 @@ extension SKView {
     }
     
     var noAdsButtonPosition: CGPoint {
-        return CGPoint(x: bounds.maxX - 100, y: bounds.maxY - 100)
+        return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.9)
     }
     
     var batteryIconPosition: CGPoint {
