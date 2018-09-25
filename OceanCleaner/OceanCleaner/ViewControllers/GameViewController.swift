@@ -79,7 +79,7 @@ extension GameViewController: GADBannerViewDelegate {
         let bannerHeight:CGFloat = 50.0
         BannerView.frame = CGRect(x: 0, y: view.bounds.maxY - bannerHeight, width: view.bounds.maxX, height: bannerHeight)
         BannerView.delegate = self
-        BannerView.adUnitID = GADValues.adUnitID
+        BannerView.adUnitID = GoogleAdmobValues.adUnitID
         BannerView.rootViewController = self
         BannerView.load(GADRequest())
         BannerView.backgroundColor = UIColor.black

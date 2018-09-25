@@ -45,8 +45,8 @@ struct AspectScaleMultiplier {
     static let noAdsButton: CGFloat = 0.2
 }
 
-struct GADValues {
-    static let adUnitID = ""
+struct GoogleAdmobValues {
+    static let adUnitID = "ca-app-pub-3910607987474251/9986271397"
 }
 
 struct InAppPurchases {
