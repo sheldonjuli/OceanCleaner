@@ -17,6 +17,8 @@ struct ImageNames {
     static let homeButton = "homeButton"
     static let retryButton = "retryButton"
     static let noAdsButton = "noAdsButton"
+    
+    static let batteryIcon = "batteryIcon"
 }
 
 struct ImageAnchorPoints {
@@ -43,6 +45,7 @@ struct AspectScaleMultiplier {
     static let homeButton: CGFloat = 0.3
     static let retryButton: CGFloat = 0.3
     static let noAdsButton: CGFloat = 0.2
+    static let batteryIcon: CGFloat = 0.1
 }
 
 struct GoogleAdmobValues {
@@ -65,5 +68,9 @@ extension SKView {
     
     var noAdsButtonPosition: CGPoint {
         return CGPoint(x: bounds.maxX - 100, y: bounds.maxY - 100)
+    }
+    
+    var batteryIconPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.95)
     }
 }

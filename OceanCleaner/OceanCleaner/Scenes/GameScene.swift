@@ -24,6 +24,13 @@ class GameScene: SKScene {
         let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
         addChild(gameSceneBackground)
         
+        let batteryIcon = SKSpriteNode(imageNamed: ImageNames.batteryIcon)
+        batteryIcon.position = view.batteryIconPosition
+        batteryIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.batteryIcon)
+        batteryIcon.zPosition = ZPositions.hudLabel
+        addChild(batteryIcon)
+        
+        
         // Counts every second
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
     }
