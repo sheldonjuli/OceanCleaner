@@ -19,8 +19,7 @@ class MenuScene: SKScene {
     override func didMove(to view: SKView) {
         
         setupMenu(view: view)
-        print(view.bounds)
-        
+
         SKPaymentQueue.default().add(self)
         getPurchaseInfo()
     }
