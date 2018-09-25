@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		24275532215A991700FB7090 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275531215A991700FB7090 /* AppDelegate.swift */; };
 		24275534215A991700FB7090 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 24275533215A991700FB7090 /* GameScene.sks */; };
-		24275536215A991700FB7090 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 24275535215A991700FB7090 /* Actions.sks */; };
 		24275538215A991700FB7090 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275537215A991700FB7090 /* GameScene.swift */; };
 		2427553A215A991700FB7090 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275539215A991700FB7090 /* GameViewController.swift */; };
 		2427553D215A991700FB7090 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2427553B215A991700FB7090 /* Main.storyboard */; };
@@ -21,7 +20,6 @@
 		2427552E215A991700FB7090 /* OceanCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OceanCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24275531215A991700FB7090 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24275533215A991700FB7090 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		24275535215A991700FB7090 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		24275537215A991700FB7090 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		24275539215A991700FB7090 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2427553C215A991700FB7090 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,17 +58,56 @@
 		24275530215A991700FB7090 /* OceanCleaner */ = {
 			isa = PBXGroup;
 			children = (
-				24275531215A991700FB7090 /* AppDelegate.swift */,
-				24275533215A991700FB7090 /* GameScene.sks */,
-				24275535215A991700FB7090 /* Actions.sks */,
-				24275537215A991700FB7090 /* GameScene.swift */,
-				24275539215A991700FB7090 /* GameViewController.swift */,
-				2427553B215A991700FB7090 /* Main.storyboard */,
+				2427554B215A9A4100FB7090 /* Scenes */,
+				24275549215A9A1000FB7090 /* ViewControllers */,
+				2427554C215A9A6600FB7090 /* CustomNodes */,
+				2427554A215A9A3400FB7090 /* Utility */,
+				2427554D215A9B1300FB7090 /* System */,
 				2427553E215A991800FB7090 /* Assets.xcassets */,
+			);
+			path = OceanCleaner;
+			sourceTree = "<group>";
+		};
+		24275549215A9A1000FB7090 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				24275539215A991700FB7090 /* GameViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2427554A215A9A3400FB7090 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		2427554B215A9A4100FB7090 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				24275533215A991700FB7090 /* GameScene.sks */,
+				24275537215A991700FB7090 /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		2427554C215A9A6600FB7090 /* CustomNodes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomNodes;
+			sourceTree = "<group>";
+		};
+		2427554D215A9B1300FB7090 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				24275531215A991700FB7090 /* AppDelegate.swift */,
+				2427553B215A991700FB7090 /* Main.storyboard */,
 				24275540215A991800FB7090 /* LaunchScreen.storyboard */,
 				24275543215A991800FB7090 /* Info.plist */,
 			);
-			path = OceanCleaner;
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +172,6 @@
 				24275534215A991700FB7090 /* GameScene.sks in Resources */,
 				2427553F215A991800FB7090 /* Assets.xcassets in Resources */,
 				24275542215A991800FB7090 /* LaunchScreen.storyboard in Resources */,
-				24275536215A991700FB7090 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
