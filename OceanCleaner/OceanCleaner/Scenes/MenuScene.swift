@@ -29,12 +29,6 @@ class MenuScene: SKScene {
         let menuSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.menuSceneBackground)
         addChild(menuSceneBackground)
         
-        let startButton = SpriteKitButton(buttonImage: ImageNames.startButton, action: goToGameScene, caseId: 0)
-        startButton.position = view.startButtonPosition
-        startButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.startButton)
-        startButton.zPosition = ZPositions.hudLabel
-        addChild(startButton)
-        
         let noAdsButton = SpriteKitButton(buttonImage: ImageNames.noAdsButton, action: goToInAppPurchase, caseId: 0)
         noAdsButton.position = view.noAdsButtonPosition
         noAdsButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.noAdsButton)
@@ -42,7 +36,12 @@ class MenuScene: SKScene {
         addChild(noAdsButton)
     }
     
-    func goToGameScene(_: Int) {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        goToGameScene()
+    }
+    
+    func goToGameScene() {
         sceneManagerDelegate?.presentGameScene()
     }
     

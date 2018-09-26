@@ -18,6 +18,7 @@ struct ImageNames {
     static let retryButton = "retryButton"
     static let noAdsButton = "noAdsButton"
     
+    static let playerIcon = "playerIcon"
     static let batteryIcon = "batteryIcon"
 }
 
@@ -35,6 +36,9 @@ struct ZPositions {
     // hud elements should have the highest priorities
     static let hudBackground: CGFloat = 10
     static let hudLabel: CGFloat = 11
+    
+    static let lazer: CGFloat = 19
+    static let player: CGFloat = 20
 }
 
 struct AspectScaleMultiplier {
@@ -44,7 +48,9 @@ struct AspectScaleMultiplier {
     static let startButton: CGFloat = 0.2
     static let homeButton: CGFloat = 0.3
     static let retryButton: CGFloat = 0.3
-    static let noAdsButton: CGFloat = 0.2
+    static let noAdsButton: CGFloat = 0.1
+    
+    static let playerIcon: CGFloat = 0.2
     static let batteryIcon: CGFloat = 0.1
 }
 
@@ -68,6 +74,10 @@ extension SKView {
     
     var noAdsButtonPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.9)
+    }
+    
+    var playerIconPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.9)
     }
     
     var batteryIconPosition: CGPoint {
