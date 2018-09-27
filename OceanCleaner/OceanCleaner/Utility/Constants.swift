@@ -83,6 +83,10 @@ extension SKView {
         return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.9)
     }
     
+    var lazerAimerPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.85)
+    }
+    
     var batteryIconPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.95)
     }
