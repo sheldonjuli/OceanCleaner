@@ -40,6 +40,7 @@ struct ZPositions {
     static let hudBackground: CGFloat = 10
     static let hudLabel: CGFloat = 11
     
+    static let oceanObject: CGFloat = 18
     static let lazer: CGFloat = 19
     static let player: CGFloat = 20
 }
