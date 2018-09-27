@@ -22,8 +22,11 @@ struct ImageNames {
     static let batteryIcon = "batteryIcon"
 }
 
-struct ImageAnchorPoints {
+struct AnchorPoints {
     static let sceneBackground = CGPoint(x: 0.5, y: 0.5)
+    
+    // Scaling Y only stretches it downwards
+    static let lazer = CGPoint(x: 0.5, y: 1.0)
 }
 
 struct ImagePositions {

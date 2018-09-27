@@ -25,6 +25,8 @@ class GameScene: SKScene {
     
     let playerIconNode = SKSpriteNode(imageNamed: ImageNames.playerIcon)
     
+    let lazerNode = SKSpriteNode(color: .blue, size: CGSize(width: 50.0, height: 50.0))
+    
     private var roundState = RoundState.idle
     
     override func didMove(to view: SKView) {
@@ -44,9 +46,8 @@ class GameScene: SKScene {
         batteryIcon.zPosition = ZPositions.hudLabel
         addChild(batteryIcon)
         
-        
         // Counts every second
-        gameTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
     }
     
     @objc func startGameTimer() {
@@ -57,9 +58,18 @@ class GameScene: SKScene {
         }
     }
     
-    func fireLazer(to touchedLocation: CGPoint) {
+    func fireLazer() {
 
         roundState = .shooting
+        
+        lazerNode.alpha = 0.5
+        lazerNode.anchorPoint = AnchorPoints.lazer
+        lazerNode.position = playerIconNode.position
+        lazerNode.zPosition = ZPositions.lazer
+        addChild(lazerNode)
+
+        lazerNode.run(SKAction.scaleY(to: 20, duration: 1.5))
+        
         print("shooting!!")
     }
     
@@ -67,20 +77,34 @@ class GameScene: SKScene {
         
         switch roundState {
         case .idle:
-            if let touch = touches.first {
-                let touchedLocation = touch.location(in: self)
-                fireLazer(to: touchedLocation)
+            if touches.first != nil {
+                fireLazer()
             }
         case .shooting, .retrieving:
             break
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func retrieveLazer() {
         
         roundState = .retrieving
+        
+        lazerNode.run(SKAction.sequence([
+            SKAction.scaleY(to: 1, duration: 1.5),
+            SKAction.removeFromParent()
+            ]), completion: { self.roundState = .idle })
         print("shooting stopped")
         
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        switch roundState {
+        case .shooting:
+            retrieveLazer()
+        case .idle, .retrieving:
+            break
+        }
     }
 
 }

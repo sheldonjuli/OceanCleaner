@@ -19,7 +19,7 @@ class SpriteKitSceneBackground: SKSpriteNode {
         super.init(texture: nil, color: UIColor.clear, size: backgroundNode.size)
         
         backgroundNode = SKSpriteNode(imageNamed: backgroundImageName)
-        backgroundNode.anchorPoint = ImageAnchorPoints.sceneBackground
+        backgroundNode.anchorPoint = AnchorPoints.sceneBackground
         backgroundNode.position = view.sceneBackgroundPosition
         backgroundNode.zPosition = ZPositions.sceneBackground
         
