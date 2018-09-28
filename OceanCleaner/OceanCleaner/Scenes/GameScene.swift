@@ -20,8 +20,9 @@ class GameScene: SKScene {
     // Score
     var currentScore: Int = 5
     
-    // Game over if lifeInt < 1
-    private var lifeInt = 1
+    // Game over if no batteries left
+    private var numBattery = 10
+    private var numBatteryLabel = SKLabelNode(text: "\(10)")
     private var gameTimer = Timer()
     
     // Player and lazer
@@ -70,19 +71,34 @@ class GameScene: SKScene {
         batteryIcon.zPosition = ZPositions.hudLabel
         addChild(batteryIcon)
         
+        
+        numBatteryLabel = SKLabelNode(text: "\(10)")
+        numBatteryLabel.fontSize = 50
+        numBatteryLabel.fontColor = .black
+        numBatteryLabel.position.x = view.batteryIconPosition.x - 75
+        numBatteryLabel.position.y = view.batteryIconPosition.y
+        numBatteryLabel.zPosition = ZPositions.hudLabel
+        addChild(numBatteryLabel)
+        
         // Create ocean objects
         createOceanObjectsTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(createOceanObjects), userInfo: nil, repeats: true)
         createOceanObjects()
         
-        // Counts every second
-        gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
+        // Reduce 1 battery every second
+        gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
     }
     
     @objc func startGameTimer() {
-        lifeInt -= 1
-        if lifeInt < 1 {
+        
+        numBattery -= 1
+        numBatteryLabel.text = "\(numBattery)"
+        
+        if numBattery < 1 {
+            
             gameTimer.invalidate()
+            createOceanObjectsTimer.invalidate()
             sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
+            
         }
     }
     
@@ -101,7 +117,6 @@ class GameScene: SKScene {
         
         lazerNode.run(SKAction.scaleY(to: 20, duration: 1.5))
         
-        print("shooting!!")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -128,8 +143,6 @@ class GameScene: SKScene {
                 self.lazerState = .idle
                 self.lazerAimer.isPaused = false
         })
-        
-        print("shooting stopped")
         
     }
     
@@ -166,7 +179,7 @@ class GameScene: SKScene {
             
             addChild(oceanObject)
         }
-
+        
     }
     
 }
