@@ -55,8 +55,8 @@ class GameScene: SKScene {
         lazerAimer.zPosition = ZPositions.lazer
         addChild(lazerAimer)
         
-        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 2)
-        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 2)
+        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
+        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
         lazerAimer.run(SKAction.repeatForever(SKAction.sequence([
             rotateLeft,
             rotateLeft.reversed(),
