@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-enum OceanObjectTypes {
+enum OceanObjectType {
     case fish
     case garbage
 }
@@ -27,43 +27,42 @@ class OceanObject: SKSpriteNode {
     
     let fishes = [FishTypes.clown, .balloon]
     let garbages = [GarbageTypes.shoe, .can]
-
-    var oceanObjectType: OceanObjectTypes
+    
+    var oceanObjectType: OceanObjectType
     
     init(level: Int) {
         
-        var oceanObjectNode: SKSpriteNode
         let oceanObjectSize = CGSize(width: 50.0, height: 50.0)
-
+        
+        var imageName = ""
+        
         let threshold = CGFloat(level) / 5 + 0.5
         if randomCGFloat(from: 0, to: 1) < threshold {
-            
-            oceanObjectType = OceanObjectTypes.fish
+            oceanObjectType = .fish
             let randomIndex = randomInt(from: 0, to: fishes.count - 1)
-            oceanObjectNode = SKSpriteNode(imageNamed: fishes[randomIndex].rawValue)
-            
-            // TODO: different objects will have different sizes
-            oceanObjectNode.size = CGSize(width: 70.0, height: 50.0)
-
+            imageName = fishes[randomIndex].rawValue
         } else {
-            
-            oceanObjectType = OceanObjectTypes.garbage
+            oceanObjectType = .garbage
             let randomIndex = randomInt(from: 0, to: garbages.count - 1)
-            oceanObjectNode = SKSpriteNode(imageNamed: garbages[randomIndex].rawValue)
-            
-            // TODO: different objects will have different sizes
-            oceanObjectNode.size = CGSize(width: 70.0, height: 70.0)
-
+            imageName = garbages[randomIndex].rawValue
         }
         
+        let oceanObjectNode = SKSpriteNode(imageNamed: imageName)
+        
+        // TODO: different objects will have different sizes
+        oceanObjectNode.size = CGSize(width: 70.0, height: 50.0)
         oceanObjectNode.zPosition = ZPositions.oceanObject
         
-        super.init(texture: nil, color: UIColor.clear, size: oceanObjectSize)
+        
+        oceanObjectNode.physicsBody = SKPhysicsBody(rectangleOf: oceanObjectNode.size)
+        oceanObjectNode.physicsBody!.categoryBitMask = oceanObjectType == .fish ? PhysicsCategories.fish : PhysicsCategories.garbage
+        oceanObjectNode.physicsBody!.collisionBitMask = PhysicsCategories.none
+        oceanObjectNode.physicsBody!.contactTestBitMask = PhysicsCategories.Lazer
+        
+        super.init(texture: nil, color: .clear, size: oceanObjectSize)
         
         addChild(oceanObjectNode)
         
-        physicsBody = SKPhysicsBody()
-
     }
     
     required init?(coder aDecoder: NSCoder) {

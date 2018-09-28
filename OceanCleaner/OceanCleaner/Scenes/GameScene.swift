@@ -66,6 +66,12 @@ class GameScene: SKScene {
             ])))
         
         
+        lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
+        lazerNode.physicsBody!.categoryBitMask = PhysicsCategories.Lazer
+        lazerNode.physicsBody!.collisionBitMask = PhysicsCategories.none
+        lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
+        
+        
         let batteryIcon = SKSpriteNode(imageNamed: ImageNames.batteryIcon)
         batteryIcon.position = view.batteryIconPosition
         batteryIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.batteryIcon)
@@ -142,6 +148,7 @@ class GameScene: SKScene {
         lazerNode.anchorPoint = AnchorPoints.lazer
         lazerNode.position = lazerAimer.position
         lazerNode.zPosition = ZPositions.lazer
+        
         addChild(lazerNode)
         
         lazerNode.run(SKAction.scaleY(to: 20, duration: 1))
