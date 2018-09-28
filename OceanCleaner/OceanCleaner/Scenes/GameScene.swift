@@ -24,7 +24,6 @@ class GameScene: SKScene {
     // Game over if no batteries left
     private var numBattery = 10
     private var numBatteryLabel = SKLabelNode(text: "\(10)")
-    private var gameTimer = Timer()
     
     // Player and lazer
     let playerIconNode = SKSpriteNode(imageNamed: ImageNames.playerIcon)
@@ -33,10 +32,6 @@ class GameScene: SKScene {
     private let lazerNode = SKSpriteNode(color: .blue, size: CGSize(width: 50.0, height: 50.0))
     
     private var lazerState = LazerState.idle
-    
-    // Ocean objects
-    private var createOceanObjectsTimer = Timer()
-    
     
     override func didMove(to view: SKView) {
         
@@ -75,12 +70,9 @@ class GameScene: SKScene {
         currentScoreLabel.zPosition = ZPositions.hudLabel
         addChild(currentScoreLabel)
         
-        // Create ocean objects
-        createOceanObjectsTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(createOceanObjects), userInfo: nil, repeats: true)
-        createOceanObjects()
+        createOceanObjects(every: 2.0)
+        updateScoreAndGameState(every: 1.0)
         
-        // Reduce 1 battery every second
-        gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
     }
     
     // This method is being called every frame
@@ -158,19 +150,28 @@ class GameScene: SKScene {
         lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
         
     }
-
     
-    @objc func startGameTimer() {
+    /**
+     Repetitively call updateScoreAndGameState() to update the score and game state.
+     
+     - Parameter second: time interval between creations.
+     */
+    func updateScoreAndGameState(every second: Double) {
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run{ self.updateScoreAndGameState() },
+            SKAction.wait(forDuration: second)
+            ])))
+        
+    }
+    
+    func updateScoreAndGameState() {
         
         numBattery -= 1
         numBatteryLabel.text = "\(numBattery)"
         
         if numBattery < 1 {
-            
-            gameTimer.invalidate()
-            createOceanObjectsTimer.invalidate()
             sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
-            
         }
     }
     
@@ -229,7 +230,21 @@ class GameScene: SKScene {
         }
     }
     
-    @objc func createOceanObjects() {
+    /**
+     Repetitively call createOceanObjects() to create ocean objects.
+     
+     - Parameter second: time interval between creations.
+     */
+    func createOceanObjects(every second: Double) {
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run{ self.createOceanObjects() },
+            SKAction.wait(forDuration: second)
+            ])))
+        
+    }
+    
+    func createOceanObjects() {
         
         guard let view = view else { return }
         
@@ -282,7 +297,7 @@ extension GameScene: SKPhysicsContactDelegate {
             retrieveLazer()
             
             let oceanObject = oceanObjectBody.node as? OceanObject
-
+            
             oceanObject?.run(SKAction.sequence([
                 SKAction.move(to: playerIconNode.position, duration: 1),
                 SKAction.removeFromParent()
