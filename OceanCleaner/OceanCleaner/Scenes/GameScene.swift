@@ -41,6 +41,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        physicsWorld.contactDelegate = self
         
         let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
         addChild(gameSceneBackground)
@@ -66,8 +67,9 @@ class GameScene: SKScene {
             ])))
         
         
+        //lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
         lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
-        lazerNode.physicsBody!.categoryBitMask = PhysicsCategories.Lazer
+        lazerNode.physicsBody!.categoryBitMask = PhysicsCategories.lazer
         lazerNode.physicsBody!.collisionBitMask = PhysicsCategories.none
         lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
         
@@ -223,4 +225,39 @@ class GameScene: SKScene {
         
     }
     
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        //var lazerBody = SKPhysicsBody()
+        var oceanObjectBody = SKPhysicsBody()
+        
+        if contact.bodyA.categoryBitMask == PhysicsCategories.lazer {
+            //lazerBody = contact.bodyA
+            oceanObjectBody = contact.bodyB
+        } else {
+            //lazerBody = contact.bodyB
+            oceanObjectBody = contact.bodyA
+        }
+        
+        if lazerState == .shooting {
+            
+            retrieveLazer()
+            
+            let oceanObject = oceanObjectBody.node as? OceanObject
+
+            oceanObject?.run(SKAction.sequence([
+                SKAction.move(to: playerIconNode.position, duration: 1),
+                SKAction.removeFromParent()
+                ]))
+            
+            if oceanObject?.oceanObjectType == OceanObjectType.garbage {
+                numBattery += 10
+            }
+            
+        }
+        
+    }
 }

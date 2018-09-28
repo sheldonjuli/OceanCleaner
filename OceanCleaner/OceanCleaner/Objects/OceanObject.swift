@@ -53,13 +53,12 @@ class OceanObject: SKSpriteNode {
         oceanObjectNode.size = CGSize(width: 70.0, height: 50.0)
         oceanObjectNode.zPosition = ZPositions.oceanObject
         
-        
-        oceanObjectNode.physicsBody = SKPhysicsBody(rectangleOf: oceanObjectNode.size)
-        oceanObjectNode.physicsBody!.categoryBitMask = oceanObjectType == .fish ? PhysicsCategories.fish : PhysicsCategories.garbage
-        oceanObjectNode.physicsBody!.collisionBitMask = PhysicsCategories.none
-        oceanObjectNode.physicsBody!.contactTestBitMask = PhysicsCategories.Lazer
-        
         super.init(texture: nil, color: .clear, size: oceanObjectSize)
+        
+        physicsBody = SKPhysicsBody(rectangleOf: oceanObjectNode.size, center: oceanObjectNode.position)
+        physicsBody!.categoryBitMask = oceanObjectType == .fish ? PhysicsCategories.fish : PhysicsCategories.garbage
+        physicsBody!.collisionBitMask = PhysicsCategories.none
+        physicsBody!.contactTestBitMask = PhysicsCategories.lazer
         
         addChild(oceanObjectNode)
         

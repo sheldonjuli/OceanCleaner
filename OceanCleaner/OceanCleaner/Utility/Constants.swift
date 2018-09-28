@@ -71,7 +71,7 @@ struct InAppPurchases {
 struct PhysicsCategories {
     static let none: UInt32 = 0
     static let all: UInt32 = UInt32.max
-    static let Lazer: UInt32 = 0x1 << 1
+    static let lazer: UInt32 = 0x1 << 1
     static let fish: UInt32 = 0x1 << 2
     static let garbage: UInt32 = 0x1 << 3
 }

@@ -35,6 +35,3 @@ func randomInt(from lowerLimit: Int, to upperLimit: Int) -> Int {
     return lowerLimit + Int(arc4random_uniform(UInt32(upperLimit - lowerLimit + 1)))
     
 }
-
-
-
