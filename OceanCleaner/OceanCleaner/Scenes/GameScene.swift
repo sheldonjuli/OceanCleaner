@@ -18,7 +18,8 @@ class GameScene: SKScene {
     var sceneManagerDelegate: SceneManagerDelegate?
     
     // Score
-    var currentScore: Int = 5
+    var currentScore: Int = 0
+    private var currentScoreLabel = SKLabelNode(text: "\(0)")
     
     // Game over if no batteries left
     private var numBattery = 10
@@ -72,13 +73,28 @@ class GameScene: SKScene {
         addChild(batteryIcon)
         
         
-        numBatteryLabel = SKLabelNode(text: "\(10)")
+        numBatteryLabel = SKLabelNode(text: "\(numBattery)")
         numBatteryLabel.fontSize = 50
         numBatteryLabel.fontColor = .black
         numBatteryLabel.position.x = view.batteryIconPosition.x - 75
         numBatteryLabel.position.y = view.batteryIconPosition.y
         numBatteryLabel.zPosition = ZPositions.hudLabel
         addChild(numBatteryLabel)
+        
+        
+        let garbageIcon = SKSpriteNode(imageNamed: ImageNames.garbageIcon)
+        garbageIcon.position = view.garbageIconPosition
+        garbageIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.garbageIcon)
+        garbageIcon.zPosition = ZPositions.hudLabel
+        addChild(garbageIcon)
+        
+        currentScoreLabel = SKLabelNode(text: "\(currentScore)")
+        currentScoreLabel.fontSize = 50
+        currentScoreLabel.fontColor = .black
+        currentScoreLabel.position.x = view.garbageIconPosition.x - 75
+        currentScoreLabel.position.y = view.garbageIconPosition.y
+        currentScoreLabel.zPosition = ZPositions.hudLabel
+        addChild(currentScoreLabel)
         
         // Create ocean objects
         createOceanObjectsTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(createOceanObjects), userInfo: nil, repeats: true)

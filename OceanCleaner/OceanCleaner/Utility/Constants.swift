@@ -20,6 +20,7 @@ struct ImageNames {
     
     static let playerIcon = "playerIcon"
     static let batteryIcon = "batteryIcon"
+    static let garbageIcon = "garbageIcon"
 }
 
 struct AnchorPoints {
@@ -56,6 +57,7 @@ struct AspectScaleMultiplier {
     
     static let playerIcon: CGFloat = 0.2
     static let batteryIcon: CGFloat = 0.1
+    static let garbageIcon: CGFloat = 0.1
 }
 
 struct GoogleAdmobValues {
@@ -90,5 +92,9 @@ extension SKView {
     
     var batteryIconPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.95)
+    }
+    
+    var garbageIconPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.85)
     }
 }
