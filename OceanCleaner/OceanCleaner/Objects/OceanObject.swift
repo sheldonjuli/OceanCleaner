@@ -35,7 +35,7 @@ class OceanObject: SKSpriteNode {
         var oceanObjectNode: SKSpriteNode
         let oceanObjectSize = CGSize(width: 50.0, height: 50.0)
 
-        let threshold = CGFloat(level) / 5
+        let threshold = CGFloat(level) / 5 + 0.5
         if randomCGFloat(from: 0, to: 1) < threshold {
             
             oceanObjectType = OceanObjectTypes.fish

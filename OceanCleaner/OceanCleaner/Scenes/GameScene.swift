@@ -128,7 +128,7 @@ class GameScene: SKScene {
         lazerNode.zPosition = ZPositions.lazer
         addChild(lazerNode)
         
-        lazerNode.run(SKAction.scaleY(to: 20, duration: 1.5))
+        lazerNode.run(SKAction.scaleY(to: 20, duration: 1))
         
     }
     
@@ -149,7 +149,7 @@ class GameScene: SKScene {
         lazerState = .retrieving
         
         lazerNode.run(SKAction.sequence([
-            SKAction.scaleY(to: 1, duration: 1.5),
+            SKAction.scaleY(to: 1, duration: 1),
             SKAction.removeFromParent()
             ]), completion:
             {
@@ -173,7 +173,7 @@ class GameScene: SKScene {
         
         guard let view = view else { return }
         
-        let numOceanObjects = randomInt(from: 3, to: 6)
+        let numOceanObjects = randomInt(from: 2, to: 4)
         
         for _ in 0..<numOceanObjects {
             
