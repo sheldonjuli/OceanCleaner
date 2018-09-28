@@ -23,6 +23,9 @@ enum GarbageTypes: String {
     case can = "can"
 }
 
+/**
+ A SKSpriteNode which captures all properties of an ocean object.
+ */
 class OceanObject: SKSpriteNode {
     
     let fishes = [FishTypes.clown, .balloon]
@@ -30,6 +33,11 @@ class OceanObject: SKSpriteNode {
     
     var oceanObjectType: OceanObjectType
     
+    /**
+     Initializes an OceanObject.
+     
+     - Parameter level: will be used to determine the swap rate of different types of objects.
+     */
     init(level: Int) {
         
         let oceanObjectSize = CGSize(width: 50.0, height: 50.0)

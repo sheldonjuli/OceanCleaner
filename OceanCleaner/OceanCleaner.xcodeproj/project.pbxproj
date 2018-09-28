@@ -86,7 +86,6 @@
 				2427554B215A9A4100FB7090 /* Scenes */,
 				24275549215A9A1000FB7090 /* ViewControllers */,
 				2427554C215A9A6600FB7090 /* CustomNodes */,
-				24275567215D6E3F00FB7090 /* Objects */,
 				2427554A215A9A3400FB7090 /* Utility */,
 				2427554D215A9B1300FB7090 /* System */,
 				2427553E215A991800FB7090 /* Assets.xcassets */,
@@ -128,6 +127,7 @@
 			children = (
 				24275558215AAB8D00FB7090 /* SpriteKitSceneBackground.swift */,
 				2427555A215AABD000FB7090 /* SpriteKitButton.swift */,
+				2427556A215D6FEF00FB7090 /* OceanObject.swift */,
 				24275561215AAD1D00FB7090 /* Popup.swift */,
 			);
 			path = CustomNodes;
@@ -142,14 +142,6 @@
 				24275543215A991800FB7090 /* Info.plist */,
 			);
 			path = System;
-			sourceTree = "<group>";
-		};
-		24275567215D6E3F00FB7090 /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				2427556A215D6FEF00FB7090 /* OceanObject.swift */,
-			);
-			path = Objects;
 			sourceTree = "<group>";
 		};
 		8F6C8A203FCE895AEC27024B /* Frameworks */ = {

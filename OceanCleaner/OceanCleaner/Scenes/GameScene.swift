@@ -40,19 +40,10 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        physicsWorld.contactDelegate = self
-        
-        let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
-        addChild(gameSceneBackground)
-        
-        
-        playerIconNode.position = view.playerIconPosition
-        playerIconNode.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.playerIcon)
-        playerIconNode.zPosition = ZPositions.player
-        addChild(playerIconNode)
-        
-        
+        setupPhysics()
+        addGameSceneBackground(view: view)
+        addPlayerNode(view: view)
+
         lazerAimer.position = view.lazerAimerPosition
         lazerAimer.zPosition = ZPositions.lazer
         addChild(lazerAimer)
@@ -123,6 +114,42 @@ class GameScene: SKScene {
                 oceanObject.removeFromParent()
             }
         }
+    }
+    
+    /**
+     Setup scene physics.
+     */
+    private func setupPhysics() {
+        
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        physicsWorld.contactDelegate = self
+        
+    }
+    
+    /**
+     Add player icon to the scene. Player icon node is used to display an image only.
+     
+     - Parameter view: used for scaling.
+     */
+    private func addPlayerNode(view: SKView) {
+        
+        playerIconNode.position = view.playerIconPosition
+        playerIconNode.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.playerIcon)
+        playerIconNode.zPosition = ZPositions.player
+        addChild(playerIconNode)
+        
+    }
+    
+    /**
+     Add gameSceneBackground to the scene.
+     
+     - Parameter view: used for scaling.
+     */
+    private func addGameSceneBackground(view: SKView) {
+        
+        let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
+        addChild(gameSceneBackground)
+        
     }
     
     @objc func startGameTimer() {

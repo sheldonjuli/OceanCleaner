@@ -8,17 +8,25 @@
 
 import SpriteKit
 
+/**
+ A SKSpriteNode which holds the background of a scene.
+ */
 class SpriteKitSceneBackground: SKSpriteNode {
     
     var backgroundNode: SKSpriteNode
     
+    /**
+     Initializes a SpriteKitSceneBackground.
+     
+     - Parameter view: The view we are trying to add to. Used for image scaling.
+     - Parameter backgroundImageName: The name of the background image.
+     */
     init(view: SKView, backgroundImageName: String) {
         
         backgroundNode = SKSpriteNode(imageNamed: backgroundImageName)
         
         super.init(texture: nil, color: UIColor.clear, size: backgroundNode.size)
         
-        backgroundNode = SKSpriteNode(imageNamed: backgroundImageName)
         backgroundNode.anchorPoint = AnchorPoints.sceneBackground
         backgroundNode.position = view.sceneBackgroundPosition
         backgroundNode.zPosition = ZPositions.sceneBackground

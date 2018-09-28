@@ -8,6 +8,9 @@
 
 import SpriteKit
 
+/**
+ A SKSpriteNode which functions as a button.
+ */
 class SpriteKitButton: SKSpriteNode {
     
     var spriteKitButton: SKSpriteNode
