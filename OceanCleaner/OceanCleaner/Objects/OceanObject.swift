@@ -35,19 +35,25 @@ class OceanObject: SKSpriteNode {
         var oceanObjectNode: SKSpriteNode
         let oceanObjectSize = CGSize(width: 50.0, height: 50.0)
 
-        let threshold = CGFloat(level) / 10
+        let threshold = CGFloat(level) / 5
         if randomCGFloat(from: 0, to: 1) < threshold {
+            
             oceanObjectType = OceanObjectTypes.fish
-//            let randomIndex = randomInt(from: 0, to: fishes.count)
-//            oceanObjectNode = SKSpriteNode(imageNamed: fishes[randomIndex].rawValue)
+            let randomIndex = randomInt(from: 0, to: fishes.count - 1)
+            oceanObjectNode = SKSpriteNode(imageNamed: fishes[randomIndex].rawValue)
             
-            oceanObjectNode = SKSpriteNode(color: .blue, size: oceanObjectSize)
+            // TODO: different objects will have different sizes
+            oceanObjectNode.size = CGSize(width: 70.0, height: 50.0)
+
         } else {
-            oceanObjectType = OceanObjectTypes.garbage
-//            let randomIndex = randomInt(from: 0, to: garbages.count)
-//            oceanObjectNode = SKSpriteNode(imageNamed: garbages[randomIndex].rawValue)
             
-            oceanObjectNode = SKSpriteNode(color: .red, size: oceanObjectSize)
+            oceanObjectType = OceanObjectTypes.garbage
+            let randomIndex = randomInt(from: 0, to: garbages.count - 1)
+            oceanObjectNode = SKSpriteNode(imageNamed: garbages[randomIndex].rawValue)
+            
+            // TODO: different objects will have different sizes
+            oceanObjectNode.size = CGSize(width: 70.0, height: 70.0)
+
         }
         
         oceanObjectNode.zPosition = ZPositions.oceanObject

@@ -185,7 +185,12 @@ class GameScene: SKScene {
             oceanObject.position.y = randomCGFloat(from: 10.0, to: view.bounds.maxY - 300)
             
             if oceanObject.position.x < view.bounds.midX {
+                
                 oceanObject.physicsBody?.velocity.dx = randomCGFloat(from: 100.0, to: 300.0)
+                
+                // All fish textures are facing left
+                oceanObject.xScale *= -1
+                
             } else {
                 oceanObject.physicsBody?.velocity.dx = randomCGFloat(from: -100.0, to: -300.0)
             }
