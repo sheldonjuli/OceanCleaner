@@ -63,7 +63,7 @@ class OceanObject: SKSpriteNode {
         
         super.init(texture: nil, color: .clear, size: oceanObjectSize)
         
-        physicsBody = SKPhysicsBody(rectangleOf: oceanObjectNode.size, center: oceanObjectNode.position)
+        physicsBody = SKPhysicsBody(rectangleOf: oceanObjectNode.size)
         physicsBody!.categoryBitMask = oceanObjectType == .fish ? PhysicsCategories.fish : PhysicsCategories.garbage
         physicsBody!.collisionBitMask = PhysicsCategories.none
         physicsBody!.contactTestBitMask = PhysicsCategories.lazer

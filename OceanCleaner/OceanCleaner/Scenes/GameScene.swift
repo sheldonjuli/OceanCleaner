@@ -29,8 +29,8 @@ class GameScene: SKScene {
     // Player and lazer
     let playerIconNode = SKSpriteNode(imageNamed: ImageNames.playerIcon)
     
-    let lazerAimer = SKSpriteNode(color: .red, size: CGSize(width: 50.0, height: 20.0))
-    let lazerNode = SKSpriteNode(color: .blue, size: CGSize(width: 50.0, height: 50.0))
+    private let lazerAimer = SKSpriteNode(color: .red, size: CGSize(width: 50.0, height: 20.0))
+    private let lazerNode = SKSpriteNode(color: .blue, size: CGSize(width: 50.0, height: 50.0))
     
     private var lazerState = LazerState.idle
     
@@ -43,27 +43,7 @@ class GameScene: SKScene {
         setupPhysics()
         addGameSceneBackground(view: view)
         addPlayerNode(view: view)
-
-        lazerAimer.position = view.lazerAimerPosition
-        lazerAimer.zPosition = ZPositions.lazer
-        addChild(lazerAimer)
-        
-        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
-        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
-        lazerAimer.run(SKAction.repeatForever(SKAction.sequence([
-            rotateLeft,
-            rotateLeft.reversed(),
-            rotateRight,
-            rotateRight.reversed()
-            ])))
-        
-        
-        //lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
-        lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
-        lazerNode.physicsBody!.categoryBitMask = PhysicsCategories.lazer
-        lazerNode.physicsBody!.collisionBitMask = PhysicsCategories.none
-        lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
-        
+        addLazer(view: view)
         
         let batteryIcon = SKSpriteNode(imageNamed: ImageNames.batteryIcon)
         batteryIcon.position = view.batteryIconPosition
@@ -127,6 +107,18 @@ class GameScene: SKScene {
     }
     
     /**
+     Add gameSceneBackground to the scene.
+     
+     - Parameter view: used for scaling.
+     */
+    private func addGameSceneBackground(view: SKView) {
+        
+        let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
+        addChild(gameSceneBackground)
+        
+    }
+    
+    /**
      Add player icon to the scene. Player icon node is used to display an image only.
      
      - Parameter view: used for scaling.
@@ -141,16 +133,32 @@ class GameScene: SKScene {
     }
     
     /**
-     Add gameSceneBackground to the scene.
+     Add all lazer components to the scene.
      
      - Parameter view: used for scaling.
      */
-    private func addGameSceneBackground(view: SKView) {
+    private func addLazer(view: SKView) {
         
-        let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
-        addChild(gameSceneBackground)
+        lazerAimer.position = view.lazerAimerPosition
+        lazerAimer.zPosition = ZPositions.lazer
+        addChild(lazerAimer)
+        
+        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
+        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
+        lazerAimer.run(SKAction.repeatForever(SKAction.sequence([
+            rotateLeft,
+            rotateLeft.reversed(),
+            rotateRight,
+            rotateRight.reversed()
+            ])))
+        
+        lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
+        lazerNode.physicsBody!.categoryBitMask = PhysicsCategories.lazer
+        lazerNode.physicsBody!.collisionBitMask = PhysicsCategories.none
+        lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
         
     }
+
     
     @objc func startGameTimer() {
         
