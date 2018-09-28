@@ -76,6 +76,11 @@ struct PhysicsCategories {
     static let garbage: UInt32 = 0x1 << 3
 }
 
+struct LazerConstant {
+    static let firingTime: Double = 1.0
+    static let retrivingTime: Double = 1.0
+}
+
 extension SKView {
     
     var sceneBackgroundPosition: CGPoint {

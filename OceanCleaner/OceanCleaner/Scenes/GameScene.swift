@@ -18,11 +18,19 @@ class GameScene: SKScene {
     var sceneManagerDelegate: SceneManagerDelegate?
     
     // Score
-    var currentScore: Int = 0
+    var currentScore: Int = 0 {
+        didSet {
+            currentScoreLabel.text = "\(currentScore)"
+        }
+    }
     private var currentScoreLabel = SKLabelNode(text: "\(0)")
     
     // Game over if no batteries left
-    private var numBattery = 10
+    private var numBattery: Int = 10 {
+        didSet {
+            numBatteryLabel.text = "\(numBattery)"
+        }
+    }
     private var numBatteryLabel = SKLabelNode(text: "\(10)")
     
     // Player and lazer
@@ -168,7 +176,6 @@ class GameScene: SKScene {
     func updateScoreAndGameState() {
         
         numBattery -= 1
-        numBatteryLabel.text = "\(numBattery)"
         
         if numBattery < 1 {
             sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
@@ -189,7 +196,7 @@ class GameScene: SKScene {
         
         addChild(lazerNode)
         
-        lazerNode.run(SKAction.scaleY(to: 20, duration: 1))
+        lazerNode.run(SKAction.scaleY(to: 20, duration: LazerConstant.firingTime))
         
     }
     
@@ -210,7 +217,7 @@ class GameScene: SKScene {
         lazerState = .retrieving
         
         lazerNode.run(SKAction.sequence([
-            SKAction.scaleY(to: 1, duration: 1),
+            SKAction.scaleY(to: 1, duration: LazerConstant.retrivingTime),
             SKAction.removeFromParent()
             ]), completion:
             {
@@ -299,15 +306,18 @@ extension GameScene: SKPhysicsContactDelegate {
             let oceanObject = oceanObjectBody.node as? OceanObject
             
             oceanObject?.run(SKAction.sequence([
-                SKAction.move(to: playerIconNode.position, duration: 1),
+                SKAction.move(to: playerIconNode.position, duration: LazerConstant.retrivingTime), // Sync with lazer retrival
                 SKAction.removeFromParent()
                 ]))
             
             if oceanObject?.oceanObjectType == OceanObjectType.garbage {
-                numBattery += 10
+                
+                self.run(SKAction.sequence([
+                    SKAction.wait(forDuration: LazerConstant.retrivingTime), // Sync with lazer retrival
+                    SKAction.run{ self.numBattery += 10; self.currentScore += 1 }
+                    ]))
+
             }
-            
         }
-        
     }
 }
