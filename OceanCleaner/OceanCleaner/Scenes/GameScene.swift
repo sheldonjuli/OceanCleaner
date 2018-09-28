@@ -88,6 +88,19 @@ class GameScene: SKScene {
         gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
     }
     
+    // This method is being called every frame
+    override func didSimulatePhysics() {
+        
+        guard let view = view else { return }
+        
+        // Remove out of scene objects
+        for oceanObject in children {
+            if oceanObject.position.x < -100 || oceanObject.position.x > view.bounds.maxX + 100 {
+                oceanObject.removeFromParent()
+            }
+        }
+    }
+    
     @objc func startGameTimer() {
         
         numBattery -= 1
