@@ -24,6 +24,8 @@
 		24275562215AAD1D00FB7090 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24275561215AAD1D00FB7090 /* Popup.swift */; };
 		2427556B215D6FEF00FB7090 /* OceanObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427556A215D6FEF00FB7090 /* OceanObject.swift */; };
 		2427556D215D71E900FB7090 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427556C215D71E900FB7090 /* MathHelper.swift */; };
+		24CDAD50215FD5860061AD7A /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CDAD4F215FD5860061AD7A /* Bubble.swift */; };
+		24CDAD52215FEE9C0061AD7A /* DrawHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CDAD51215FEE9C0061AD7A /* DrawHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		24275561215AAD1D00FB7090 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		2427556A215D6FEF00FB7090 /* OceanObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OceanObject.swift; sourceTree = "<group>"; };
 		2427556C215D71E900FB7090 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
+		24CDAD4F215FD5860061AD7A /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
+		24CDAD51215FEE9C0061AD7A /* DrawHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHelper.swift; sourceTree = "<group>"; };
 		4BFA4B8266A05762D794BDB1 /* Pods-OceanCleaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.debug.xcconfig"; sourceTree = "<group>"; };
 		EC90E8DCAD05DB8CF6BE193E /* Pods-OceanCleaner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OceanCleaner.release.xcconfig"; path = "Pods/Target Support Files/Pods-OceanCleaner/Pods-OceanCleaner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +111,7 @@
 				24275554215AAAF300FB7090 /* Constants.swift */,
 				2427555D215AAC1800FB7090 /* SKNodeExtensions.swift */,
 				2427556C215D71E900FB7090 /* MathHelper.swift */,
+				24CDAD51215FEE9C0061AD7A /* DrawHelper.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				2427555A215AABD000FB7090 /* SpriteKitButton.swift */,
 				2427556A215D6FEF00FB7090 /* OceanObject.swift */,
 				24275561215AAD1D00FB7090 /* Popup.swift */,
+				24CDAD4F215FD5860061AD7A /* Bubble.swift */,
 			);
 			path = CustomNodes;
 			sourceTree = "<group>";
@@ -260,7 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2427556B215D6FEF00FB7090 /* OceanObject.swift in Sources */,
+				24CDAD50215FD5860061AD7A /* Bubble.swift in Sources */,
 				24275538215A991700FB7090 /* GameScene.swift in Sources */,
+				24CDAD52215FEE9C0061AD7A /* DrawHelper.swift in Sources */,
 				2427553A215A991700FB7090 /* GameViewController.swift in Sources */,
 				24275562215AAD1D00FB7090 /* Popup.swift in Sources */,
 				24275557215AAB3300FB7090 /* MenuScene.swift in Sources */,

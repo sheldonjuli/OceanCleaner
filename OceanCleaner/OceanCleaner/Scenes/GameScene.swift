@@ -41,6 +41,9 @@ class GameScene: SKScene {
     
     private var lazerState = LazerState.idle
     
+    // Scene animations
+    private var bubbles = [Bubble]()
+    
     override func didMove(to view: SKView) {
         
         setupPhysics()
@@ -78,6 +81,7 @@ class GameScene: SKScene {
         currentScoreLabel.zPosition = ZPositions.hudLabel
         addChild(currentScoreLabel)
         
+        animateBubble(every: 0.2)
         createOceanObjects(every: 2.0)
         updateScoreAndGameState(every: 1.0)
         
@@ -282,6 +286,55 @@ class GameScene: SKScene {
         
     }
     
+    /**
+     Add and animate bubbles every given second.
+     
+     - Parameter second: time interval between creations.
+     */
+    func animateBubble(every second: Double) {
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run{ self.addBubbles(); self.floatBubbles() },
+            SKAction.wait(forDuration: second)
+            ])))
+        
+    }
+    
+    func addBubbles() {
+        addBubble(on: BubbleLayer.one, at: CGPoint(x: 100, y: 100))
+        addBubble(on: BubbleLayer.one, at: CGPoint(x: 500, y: 100))
+        addBubble(on: BubbleLayer.two, at: CGPoint(x: 200, y: 200))
+        addBubble(on: BubbleLayer.two, at: CGPoint(x: 350, y: 200))
+    }
+    
+    func addBubble(on layer: BubbleLayer, at position: CGPoint) {
+        let bubble = Bubble(on: layer)
+        bubble.position = position
+        bubbles.append(bubble)
+        addChild(bubble)
+    }
+    
+    func floatBubbles() {
+        for bubble in bubbles {
+            
+            let xOffset: CGFloat = CGFloat(arc4random_uniform(20)) - 10.0
+            let yOffset: CGFloat = 20.0
+            let newLocation = CGPoint(x: bubble.position.x + xOffset, y: bubble.position.y + yOffset)
+            let moveAction = SKAction.move(to: newLocation, duration: 0.2)
+            bubble.run(moveAction)
+            
+            bubble.lifeRemain -= 1
+            
+            if bubble.lifeRemain < 1 {
+                bubble.removeFromParent()
+                
+                if let index = bubbles.index(of: bubble) {
+                    bubbles.remove(at: index)
+                }
+            }
+            
+        }
+    }
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -316,7 +369,7 @@ extension GameScene: SKPhysicsContactDelegate {
                     SKAction.wait(forDuration: LazerConstant.retrivingTime), // Sync with lazer retrival
                     SKAction.run{ self.numBattery += 10; self.currentScore += 1 }
                     ]))
-
+                
             }
         }
     }
