@@ -50,36 +50,7 @@ class GameScene: SKScene {
         addGameSceneBackground(view: view)
         addPlayerNode(view: view)
         addLazer(view: view)
-        
-        let batteryIcon = SKSpriteNode(imageNamed: ImageNames.batteryIcon)
-        batteryIcon.position = view.batteryIconPosition
-        batteryIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.batteryIcon)
-        batteryIcon.zPosition = ZPositions.hudLabel
-        addChild(batteryIcon)
-        
-        
-        numBatteryLabel = SKLabelNode(text: "\(numBattery)")
-        numBatteryLabel.fontSize = 50
-        numBatteryLabel.fontColor = .black
-        numBatteryLabel.position.x = view.batteryIconPosition.x - 75
-        numBatteryLabel.position.y = view.batteryIconPosition.y
-        numBatteryLabel.zPosition = ZPositions.hudLabel
-        addChild(numBatteryLabel)
-        
-        
-        let garbageIcon = SKSpriteNode(imageNamed: ImageNames.garbageIcon)
-        garbageIcon.position = view.garbageIconPosition
-        garbageIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.garbageIcon)
-        garbageIcon.zPosition = ZPositions.hudLabel
-        addChild(garbageIcon)
-        
-        currentScoreLabel = SKLabelNode(text: "\(currentScore)")
-        currentScoreLabel.fontSize = 50
-        currentScoreLabel.fontColor = .black
-        currentScoreLabel.position.x = view.garbageIconPosition.x - 75
-        currentScoreLabel.position.y = view.garbageIconPosition.y
-        currentScoreLabel.zPosition = ZPositions.hudLabel
-        addChild(currentScoreLabel)
+        addHudLabels(view: view)
         
         animateBubble(every: 0.2)
         createOceanObjects(every: 2.0)
@@ -161,6 +132,52 @@ class GameScene: SKScene {
         lazerNode.physicsBody!.collisionBitMask = PhysicsCategories.none
         lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
         
+    }
+    
+    /**
+     Add all battery icon and label to the scene.
+     
+     - Parameter view: used for scaling.
+     */
+    private func addHudLabels(view: SKView) {
+        
+        let labelFontName = "ChalkboardSE-Bold"
+
+        let batteryIcon = SKSpriteNode(imageNamed: ImageNames.batteryIcon)
+        batteryIcon.position = view.batteryIconPosition
+        batteryIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.batteryIcon)
+        batteryIcon.zPosition = ZPositions.hudLabel
+        addChild(batteryIcon)
+        
+        let labelTextOffsetX = batteryIcon.size.width * 1
+        let labelTextOffsetY = batteryIcon.size.height * 0.4
+        let labelFontSize = batteryIcon.size.height
+
+        numBatteryLabel = SKLabelNode(text: "\(numBattery)")
+        numBatteryLabel.fontName = labelFontName
+        numBatteryLabel.fontSize = labelFontSize
+        numBatteryLabel.fontColor = .white
+        numBatteryLabel.position.x = view.batteryIconPosition.x - labelTextOffsetX
+        numBatteryLabel.position.y = view.batteryIconPosition.y - labelTextOffsetY
+        numBatteryLabel.zPosition = ZPositions.hudLabel
+        addChild(numBatteryLabel)
+        
+        
+        let garbageIcon = SKSpriteNode(imageNamed: ImageNames.garbageIcon)
+        garbageIcon.position = view.garbageIconPosition
+        garbageIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.garbageIcon)
+        garbageIcon.zPosition = ZPositions.hudLabel
+        addChild(garbageIcon)
+        
+        currentScoreLabel = SKLabelNode(text: "\(currentScore)")
+        currentScoreLabel.fontName = labelFontName
+        currentScoreLabel.fontSize = labelFontSize
+        currentScoreLabel.fontColor = .white
+        currentScoreLabel.position.x = view.garbageIconPosition.x - labelTextOffsetX
+        currentScoreLabel.position.y = view.garbageIconPosition.y - labelTextOffsetY
+        currentScoreLabel.zPosition = ZPositions.hudLabel
+        addChild(currentScoreLabel)
+
     }
     
     /**

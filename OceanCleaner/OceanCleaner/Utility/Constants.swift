@@ -56,7 +56,7 @@ struct AspectScaleMultiplier {
     static let noAdsButton: CGFloat = 0.1
     
     static let playerIcon: CGFloat = 0.2
-    static let batteryIcon: CGFloat = 0.1
+    static let batteryIcon: CGFloat = 0.09
     static let garbageIcon: CGFloat = 0.1
 }
 
@@ -104,7 +104,7 @@ extension SKView {
     }
     
     var batteryIconPosition: CGPoint {
-        return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.95)
+        return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.925)
     }
     
     var garbageIconPosition: CGPoint {
