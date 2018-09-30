@@ -31,15 +31,26 @@ class ScoreScene: SKScene {
     }
     
     private func saveHighestScore() {
+        
         let userDefaults = UserDefaults.standard
-        let highestScore = userDefaults.integer(forKey: "highestScore")
+        let highestScoreArrayKey = "highestScoreArray"
+        
+        // [highest, 2nd highest, 3rd highest]
+        var highestScoreArray = (userDefaults.array(forKey: highestScoreArrayKey) ?? [0, 0, 0]) as! [Int]
         
         print("Score \(currentScore)")
-        print("Highest \(highestScore)")
+        print("Highest \(highestScoreArray)")
         
-        if currentScore > highestScore {
-            userDefaults.set(currentScore, forKey: "highestScore")
+        for i in 0..<highestScoreArray.count {
+            if currentScore > highestScoreArray[i] {
+                highestScoreArray.insert(currentScore, at: i)
+                highestScoreArray.removeLast()
+                userDefaults.set(highestScoreArray, forKey: highestScoreArrayKey)
+                break
+            }
         }
+        
+        print("New Highest \(highestScoreArray)")
     }
     
     private func addBackground(view: SKView) {
