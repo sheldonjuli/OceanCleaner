@@ -26,7 +26,7 @@ class GameScene: SKScene {
     private var currentScoreLabel = SKLabelNode(text: "\(0)")
     
     // Game over if no batteries left
-    private var numBattery: Int = 5 {
+    private var numBattery: Int = 20 {
         didSet {
             numBatteryLabel.text = "\(numBattery)"
         }
@@ -36,9 +36,19 @@ class GameScene: SKScene {
     // Player and lazer
     let playerIconNode = SKSpriteNode(imageNamed: ImageNames.playerIcon)
     
-    private let lazerAimer = SKSpriteNode(color: .red, size: CGSize(width: 50.0, height: 20.0))
-    private let lazerNode = SKSpriteNode(color: .blue, size: CGSize(width: 50.0, height: 50.0))
-    
+    private let lazer = SKSpriteNode(imageNamed: ImageNames.lazer)
+
+    private var lazerRotation: SKAction {
+        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
+        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
+        return SKAction.repeatForever(SKAction.sequence([
+            rotateLeft,
+            rotateLeft.reversed(),
+            rotateRight,
+            rotateRight.reversed()
+            ]))
+    }
+
     private var lazerState = LazerState.idle
     
     // Scene animations
@@ -114,23 +124,18 @@ class GameScene: SKScene {
      */
     private func addLazer(view: SKView) {
         
-        lazerAimer.position = view.lazerAimerPosition
-        lazerAimer.zPosition = ZPositions.lazer
-        addChild(lazerAimer)
+        lazer.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.lazer)
+        lazer.anchorPoint = AnchorPoints.lazer
+        lazer.position = view.lazerPosition
+        lazer.zPosition = ZPositions.lazer
+        addChild(lazer)
         
-        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
-        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
-        lazerAimer.run(SKAction.repeatForever(SKAction.sequence([
-            rotateLeft,
-            rotateLeft.reversed(),
-            rotateRight,
-            rotateRight.reversed()
-            ])))
+        lazer.run(lazerRotation)
         
-        lazerNode.physicsBody = SKPhysicsBody(rectangleOf: lazerNode.size)
-        lazerNode.physicsBody!.categoryBitMask = PhysicsCategories.lazer
-        lazerNode.physicsBody!.collisionBitMask = PhysicsCategories.none
-        lazerNode.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
+        lazer.physicsBody = SKPhysicsBody(rectangleOf: lazer.size)
+        lazer.physicsBody!.categoryBitMask = PhysicsCategories.lazer
+        lazer.physicsBody!.collisionBitMask = PhysicsCategories.none
+        lazer.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
         
     }
     
@@ -206,18 +211,8 @@ class GameScene: SKScene {
     func fireLazer() {
         
         lazerState = .shooting
-        
-        lazerAimer.isPaused = true
-        
-        lazerNode.zRotation = lazerAimer.zRotation
-        lazerNode.alpha = 0.5
-        lazerNode.anchorPoint = AnchorPoints.lazer
-        lazerNode.position = lazerAimer.position
-        lazerNode.zPosition = ZPositions.lazer
-        
-        addChild(lazerNode)
-        
-        lazerNode.run(SKAction.scaleY(to: 20, duration: LazerConstant.firingTime))
+        lazer.removeAllActions()
+        lazer.run(SKAction.scaleY(to: 20, duration: LazerConstant.firingTime))
         
     }
     
@@ -236,14 +231,20 @@ class GameScene: SKScene {
     func retrieveLazer() {
         
         lazerState = .retrieving
+        let rotatedAngle = lazer.zRotation
+        let rotateDuration = TimeInterval(abs(2 * rotatedAngle / .pi))
         
-        lazerNode.run(SKAction.sequence([
+        lazer.run(SKAction.sequence([
             SKAction.scaleY(to: 1, duration: LazerConstant.retrivingTime),
-            SKAction.removeFromParent()
+            SKAction.rotate(byAngle: -rotatedAngle, duration: rotateDuration)
             ]), completion:
             {
                 self.lazerState = .idle
-                self.lazerAimer.isPaused = false
+                if rotatedAngle < 0 {
+                    self.lazer.run(self.lazerRotation.reversed())
+                } else {
+                    self.lazer.run(self.lazerRotation)
+                }
         })
         
     }

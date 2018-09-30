@@ -18,6 +18,7 @@ struct ImageNames {
     // Game Scene
     static let gameSceneBackground = "gameSceneBackground"
     static let playerIcon = "playerIcon"
+    static let lazer = "lazer"
     static let batteryIcon = "batteryIcon"
     static let garbageIcon = "garbageIcon"
     
@@ -62,6 +63,7 @@ struct AspectScaleMultiplier {
     
     // Game Scene
     static let playerIcon: CGFloat = 0.2
+    static let lazer: CGFloat = 0.1
     static let batteryIcon: CGFloat = 0.09
     static let garbageIcon: CGFloat = 0.1
     
@@ -114,8 +116,8 @@ extension SKView {
         return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.9)
     }
     
-    var lazerAimerPosition: CGPoint {
-        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.85)
+    var lazerPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.9)
     }
     
     var batteryIconPosition: CGPoint {
