@@ -25,6 +25,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         presentMenuScene()
         addGADBanner()
+        addRewardBasedAd()
     }
 }
 
@@ -80,7 +81,7 @@ extension GameViewController: GADBannerViewDelegate {
         let bannerHeight:CGFloat = 50.0
         BannerView.frame = CGRect(x: 0, y: view.bounds.maxY - bannerHeight, width: view.bounds.maxX, height: bannerHeight)
         BannerView.delegate = self
-        BannerView.adUnitID = GoogleAdmobValues.adUnitID
+        BannerView.adUnitID = GoogleAdmobValues.BannerAdUnitID
         BannerView.rootViewController = self
         BannerView.load(GADRequest())
         BannerView.backgroundColor = UIColor.black
@@ -96,4 +97,48 @@ extension GameViewController: GADBannerViewDelegate {
         print(error)
         bannerView.isHidden = true
     }
+}
+
+extension GameViewController: GADRewardBasedVideoAdDelegate {
+    
+    func addRewardBasedAd() {
+        let rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
+        rewardBasedAd.delegate = self
+        rewardBasedAd.load(GADRequest(), withAdUnitID: GoogleAdmobValues.RewardAdUnitID)
+    }
+    
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
+                            didRewardUserWith reward: GADAdReward) {
+        print("Reward received with currency: \(reward.type), amount \(reward.amount).")
+    }
+    
+    func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd:GADRewardBasedVideoAd) {
+        print("Reward based video ad is received.")
+    }
+    
+    func rewardBasedVideoAdDidOpen(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Opened reward based video ad.")
+    }
+    
+    func rewardBasedVideoAdDidStartPlaying(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad started playing.")
+    }
+    
+    func rewardBasedVideoAdDidCompletePlaying(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad has completed.")
+    }
+    
+    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad is closed.")
+    }
+    
+    func rewardBasedVideoAdWillLeaveApplication(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        print("Reward based video ad will leave application.")
+    }
+    
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
+                            didFailToLoadWithError error: Error) {
+        print("Reward based video ad failed to load.")
+    }
+    
 }
