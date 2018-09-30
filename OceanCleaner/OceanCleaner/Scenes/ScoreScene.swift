@@ -20,6 +20,8 @@ class ScoreScene: SKScene {
     // Will be set by GameScene
     var currentScore: Int = 0
     
+    var highestScoreArray = [0, 0, 0]
+    
     override func didMove(to view: SKView) {
         
         saveHighestScore()
@@ -36,10 +38,7 @@ class ScoreScene: SKScene {
         let highestScoreArrayKey = "highestScoreArray"
         
         // [highest, 2nd highest, 3rd highest]
-        var highestScoreArray = (userDefaults.array(forKey: highestScoreArrayKey) ?? [0, 0, 0]) as! [Int]
-        
-        print("Score \(currentScore)")
-        print("Highest \(highestScoreArray)")
+        highestScoreArray = userDefaults.array(forKey: highestScoreArrayKey) as? [Int] ?? highestScoreArray
         
         for i in 0..<highestScoreArray.count {
             if currentScore > highestScoreArray[i] {
@@ -49,8 +48,6 @@ class ScoreScene: SKScene {
                 break
             }
         }
-        
-        print("New Highest \(highestScoreArray)")
     }
     
     private func addBackground(view: SKView) {
@@ -65,7 +62,28 @@ class ScoreScene: SKScene {
         scoreBoard.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.scoreBoard)
         scoreBoard.position = view.scoreBoardPosition
         scoreBoard.zPosition = ZPositions.hudBackground
+ 
+        let sectionHeight = 0.75  * scoreBoard.size.height / 4
         
+        // Add the new score in the loop as well
+        for i in 0...highestScoreArray.count {
+            
+            let scoreNode = SKLabelNode(text: "")
+            if i == highestScoreArray.count {
+                scoreNode.text = "New. \(currentScore)"
+            } else {
+                scoreNode.text = "\(i+1). \(highestScoreArray[i])"
+            }
+            
+            scoreNode.fontName = "ChalkboardSE-Bold"
+            scoreNode.fontSize = sectionHeight * 0.5
+            scoreNode.fontColor = .white
+            scoreNode.position.x = scoreBoard.frame.midX
+            scoreNode.position.y = scoreBoard.frame.maxY * 0.95 - sectionHeight * CGFloat(i+1)
+            scoreNode.zPosition = ZPositions.hudLabel
+            addChild(scoreNode)
+        }
+
         addChild(scoreBoard)
     }
     
