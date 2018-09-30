@@ -9,18 +9,24 @@
 import SpriteKit
 
 struct ImageNames {
-    static let menuSceneBackground = "menuSceneBackground"
-    static let gameSceneBackground = "gameSceneBackground"
-    static let scoreSceneBackground = "scoreSceneBackground"
     
+    // Menu Scene
+    static let menuSceneBackground = "menuSceneBackground"
     static let startButton = "startButton"
-    static let homeButton = "homeButton"
-    static let retryButton = "retryButton"
     static let noAdsButton = "noAdsButton"
     
+    // Game Scene
+    static let gameSceneBackground = "gameSceneBackground"
     static let playerIcon = "playerIcon"
     static let batteryIcon = "batteryIcon"
     static let garbageIcon = "garbageIcon"
+    
+    // Score Scene
+    static let scoreSceneBackground = "scoreSceneBackground"
+    static let scoreBoard = "scoreBoard"
+    static let homeButton = "homeButton"
+    static let retryButton = "retryButton"
+    
 }
 
 struct AnchorPoints {
@@ -46,18 +52,23 @@ struct ZPositions {
     static let player: CGFloat = 20
 }
 
+// Relative to parent size
 struct AspectScaleMultiplier {
-    // Relative to parent size
-    static let popup: CGFloat = 0.5
+    static let popup: CGFloat = 0.75
     
+    // Menu Scene
     static let startButton: CGFloat = 0.2
-    static let homeButton: CGFloat = 0.3
-    static let retryButton: CGFloat = 0.3
     static let noAdsButton: CGFloat = 0.1
     
+    // Game Scene
     static let playerIcon: CGFloat = 0.2
     static let batteryIcon: CGFloat = 0.09
     static let garbageIcon: CGFloat = 0.1
+    
+    // Score Scene
+    static let scoreBoard: CGFloat = 0.75
+    static let homeButton: CGFloat = 0.1
+    static let retryButton: CGFloat = 0.1
 }
 
 struct GoogleAdmobValues {
@@ -87,6 +98,8 @@ extension SKView {
         return CGPoint(x: bounds.midX, y: bounds.midY)
     }
     
+    // Menu Scene
+    
     var startButtonPosition: CGPoint {
         return CGPoint(x: bounds.midX, y: bounds.midY * 0.8)
     }
@@ -94,6 +107,8 @@ extension SKView {
     var noAdsButtonPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.9)
     }
+    
+    // Game Scene
     
     var playerIconPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.9)
@@ -109,5 +124,19 @@ extension SKView {
     
     var garbageIconPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.85)
+    }
+    
+    // Score Scene
+    
+    var scoreBoardPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.5)
+    }
+    
+    var homeButtonPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.2, y: bounds.maxY * 0.2)
+    }
+    
+    var retryButtonPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.8, y: bounds.maxY * 0.2)
     }
 }

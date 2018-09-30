@@ -26,7 +26,7 @@ class GameScene: SKScene {
     private var currentScoreLabel = SKLabelNode(text: "\(0)")
     
     // Game over if no batteries left
-    private var numBattery: Int = 10 {
+    private var numBattery: Int = 5 {
         didSet {
             numBatteryLabel.text = "\(numBattery)"
         }

@@ -7,6 +7,12 @@
 //
 
 import SpriteKit
+
+struct PopupButton {
+    static let home = 0
+    static let retry = 1
+}
+
 class ScoreScene: SKScene {
     
     var sceneManagerDelegate: SceneManagerDelegate?
@@ -18,7 +24,10 @@ class ScoreScene: SKScene {
         
         saveHighestScore()
         addBackground(view: view)
-        presentPopup()
+        addScoreBoard(view: view)
+        addHomeButton(view: view)
+        addRetryButton(view: view)
+        
     }
     
     private func saveHighestScore() {
@@ -39,22 +48,44 @@ class ScoreScene: SKScene {
         addChild(scoreSceneBackground)
     }
     
-    private func presentPopup() {
-        let popup = Popup(size: frame.size)
-        popup.zPosition = ZPositions.hudBackground
-        popup.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
-        popup.popupButtonHandlerDelegate = self
-        addChild(popup)
-    }
-}
-
-extension ScoreScene: PopupButtonHandlerDelegate {
-    
-    func homeButtonTapped() {
-        sceneManagerDelegate?.presentMenuScene()
+    private func addScoreBoard(view: SKView) {
+        
+        let scoreBoard = SKSpriteNode(imageNamed: ImageNames.scoreBoard)
+        scoreBoard.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.scoreBoard)
+        scoreBoard.position = view.scoreBoardPosition
+        scoreBoard.zPosition = ZPositions.hudBackground
+        
+        addChild(scoreBoard)
     }
     
-    func retryButtonTapped() {
-        sceneManagerDelegate?.presentGameScene()
+    private func addHomeButton(view: SKView) {
+        
+        let homeButton = SpriteKitButton(buttonImage: ImageNames.homeButton, action: buttonClicked, caseId: PopupButton.home)
+        homeButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.homeButton)
+        homeButton.position = view.homeButtonPosition
+        homeButton.zPosition = ZPositions.hudLabel
+        
+        addChild(homeButton)
+    }
+    
+    private func addRetryButton(view: SKView) {
+        
+        let retryButton = SpriteKitButton(buttonImage: ImageNames.retryButton, action: buttonClicked, caseId: PopupButton.retry)
+        retryButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.retryButton)
+        retryButton.position = view.retryButtonPosition
+        retryButton.zPosition = ZPositions.hudLabel
+        
+        addChild(retryButton)
+    }
+    
+    func buttonClicked(index: Int) {
+        switch index {
+        case PopupButton.home:
+            sceneManagerDelegate?.presentMenuScene()
+        case PopupButton.retry:
+            sceneManagerDelegate?.presentGameScene()
+        default:
+            break
+        }
     }
 }
