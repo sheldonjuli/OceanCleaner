@@ -129,14 +129,14 @@ extension SKView {
     // Score Scene
     
     var scoreBoardPosition: CGPoint {
-        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.5)
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.6)
     }
     
     var homeButtonPosition: CGPoint {
-        return CGPoint(x: bounds.maxX * 0.2, y: bounds.maxY * 0.2)
+        return CGPoint(x: bounds.maxX * 0.3, y: bounds.maxY * 0.3)
     }
     
     var retryButtonPosition: CGPoint {
-        return CGPoint(x: bounds.maxX * 0.8, y: bounds.maxY * 0.2)
+        return CGPoint(x: bounds.maxX * 0.7, y: bounds.maxY * 0.3)
     }
 }
