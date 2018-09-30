@@ -133,7 +133,7 @@ class GameScene: SKScene {
         lazer.run(lazerRotation)
         
         // The height is adjusted to accommodate anchor point
-        let adjustedSize = CGSize(width: lazer.size.width / 2, height: lazer.size.height * 2)
+        let adjustedSize = CGSize(width: lazer.size.width / 2, height: lazer.size.height * 1.8)
         lazer.physicsBody = SKPhysicsBody(rectangleOf: adjustedSize)
         lazer.physicsBody!.categoryBitMask = PhysicsCategories.lazer
         lazer.physicsBody!.collisionBitMask = PhysicsCategories.none
