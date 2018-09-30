@@ -132,7 +132,9 @@ class GameScene: SKScene {
         
         lazer.run(lazerRotation)
         
-        lazer.physicsBody = SKPhysicsBody(rectangleOf: lazer.size)
+        // The height is adjusted to accommodate anchor point
+        let adjustedSize = CGSize(width: lazer.size.width / 2, height: lazer.size.height * 2)
+        lazer.physicsBody = SKPhysicsBody(rectangleOf: adjustedSize)
         lazer.physicsBody!.categoryBitMask = PhysicsCategories.lazer
         lazer.physicsBody!.collisionBitMask = PhysicsCategories.none
         lazer.physicsBody!.contactTestBitMask = PhysicsCategories.fish | PhysicsCategories.garbage
@@ -244,8 +246,11 @@ class GameScene: SKScene {
         let rotatedAngle = lazer.zRotation
         let rotateBackDuration = TimeInterval(abs(2 * rotatedAngle / .pi))
         
+        // Scale back to the original size, set at 0.5 so the physics works properly
+        let adjustedOriginalScale = CGFloat(0.5)
+        
         lazer.run(SKAction.sequence([
-            SKAction.scaleY(to: 1, duration: retriveDuration),
+            SKAction.scaleY(to: adjustedOriginalScale, duration: retriveDuration),
             SKAction.rotate(byAngle: -rotatedAngle, duration: rotateBackDuration)
             ]), completion:
             {
