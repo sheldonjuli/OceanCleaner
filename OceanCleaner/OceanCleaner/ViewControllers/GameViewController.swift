@@ -104,7 +104,11 @@ extension GameViewController: GADRewardBasedVideoAdDelegate {
     func addRewardBasedAd() {
         let rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
         rewardBasedAd.delegate = self
-        rewardBasedAd.load(GADRequest(), withAdUnitID: GoogleAdmobValues.RewardAdUnitID)
+        let request = GADRequest()
+        
+        // TDOD remove test code
+        request.testDevices = [ "b90d517bbd126ad43c612357a349ee23" ]
+        rewardBasedAd.load(request, withAdUnitID: GoogleAdmobValues.RewardAdUnitID)
     }
     
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
