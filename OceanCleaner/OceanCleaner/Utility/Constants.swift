@@ -90,8 +90,10 @@ struct PhysicsCategories {
 }
 
 struct LazerConstant {
+    
+    static let maxScaleY: CGFloat = 15.0
     static let firingTime: Double = 1.0
-    static let retrivingTime: Double = 1.0
+    
 }
 
 extension SKView {

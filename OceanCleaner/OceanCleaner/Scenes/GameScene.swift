@@ -37,7 +37,7 @@ class GameScene: SKScene {
     let playerIconNode = SKSpriteNode(imageNamed: ImageNames.playerIcon)
     
     private let lazer = SKSpriteNode(imageNamed: ImageNames.lazer)
-
+    
     private var lazerRotation: SKAction {
         let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
         let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
@@ -48,7 +48,7 @@ class GameScene: SKScene {
             rotateRight.reversed()
             ]))
     }
-
+    
     private var lazerState = LazerState.idle
     
     // Scene animations
@@ -147,7 +147,7 @@ class GameScene: SKScene {
     private func addHudLabels(view: SKView) {
         
         let labelFontName = "ChalkboardSE-Bold"
-
+        
         let batteryIcon = SKSpriteNode(imageNamed: ImageNames.batteryIcon)
         batteryIcon.position = view.batteryIconPosition
         batteryIcon.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.batteryIcon)
@@ -157,7 +157,7 @@ class GameScene: SKScene {
         let labelTextOffsetX = batteryIcon.size.width * 1
         let labelTextOffsetY = batteryIcon.size.height * 0.4
         let labelFontSize = batteryIcon.size.height
-
+        
         numBatteryLabel = SKLabelNode(text: "\(numBattery)")
         numBatteryLabel.fontName = labelFontName
         numBatteryLabel.fontSize = labelFontSize
@@ -182,7 +182,7 @@ class GameScene: SKScene {
         currentScoreLabel.position.y = view.garbageIconPosition.y - labelTextOffsetY
         currentScoreLabel.zPosition = ZPositions.hudLabel
         addChild(currentScoreLabel)
-
+        
     }
     
     /**
@@ -212,7 +212,7 @@ class GameScene: SKScene {
         
         lazerState = .shooting
         lazer.removeAllActions()
-        lazer.run(SKAction.scaleY(to: 20, duration: LazerConstant.firingTime))
+        lazer.run(SKAction.scaleY(to: LazerConstant.maxScaleY, duration: LazerConstant.firingTime))
         
     }
     
@@ -228,15 +228,25 @@ class GameScene: SKScene {
         }
     }
     
+    private func getLazerRetrieveTime() -> Double {
+        
+        let lazerScaleY = lazer.yScale
+        return Double(lazerScaleY / LazerConstant.maxScaleY) * LazerConstant.firingTime
+        
+    }
+    
     func retrieveLazer() {
         
         lazerState = .retrieving
+        lazer.removeAllActions()
+        
+        let retriveDuration = getLazerRetrieveTime()
         let rotatedAngle = lazer.zRotation
-        let rotateDuration = TimeInterval(abs(2 * rotatedAngle / .pi))
+        let rotateBackDuration = TimeInterval(abs(2 * rotatedAngle / .pi))
         
         lazer.run(SKAction.sequence([
-            SKAction.scaleY(to: 1, duration: LazerConstant.retrivingTime),
-            SKAction.rotate(byAngle: -rotatedAngle, duration: rotateDuration)
+            SKAction.scaleY(to: 1, duration: retriveDuration),
+            SKAction.rotate(byAngle: -rotatedAngle, duration: rotateBackDuration)
             ]), completion:
             {
                 self.lazerState = .idle
@@ -374,17 +384,19 @@ extension GameScene: SKPhysicsContactDelegate {
             
             retrieveLazer()
             
+            let retriveDuration = getLazerRetrieveTime()
+            
             let oceanObject = oceanObjectBody.node as? OceanObject
             
             oceanObject?.run(SKAction.sequence([
-                SKAction.move(to: playerIconNode.position, duration: LazerConstant.retrivingTime), // Sync with lazer retrival
+                SKAction.move(to: playerIconNode.position, duration: retriveDuration), // Sync with lazer retrival
                 SKAction.removeFromParent()
                 ]))
             
             if oceanObject?.oceanObjectType == OceanObjectType.garbage {
                 
                 self.run(SKAction.sequence([
-                    SKAction.wait(forDuration: LazerConstant.retrivingTime), // Sync with lazer retrival
+                    SKAction.wait(forDuration: retriveDuration), // Sync with lazer retrival
                     SKAction.run{ self.numBattery += 10; self.currentScore += 1 }
                     ]))
                 
