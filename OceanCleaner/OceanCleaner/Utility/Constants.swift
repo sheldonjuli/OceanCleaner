@@ -80,6 +80,8 @@ struct GoogleAdmobValues {
     
     static let RewardAdUnitID = "ca-app-pub-3910607987474251/9989563835"
     
+    static let interstitialAdUnitID = "ca-app-pub-3910607987474251/6122433022"
+    
 }
 
 struct InAppPurchases {

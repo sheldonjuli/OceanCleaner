@@ -34,7 +34,7 @@ class GameScene: SKScene {
     private var isSecondLife = false
     
     // Game over if no batteries left
-    private var numBattery: Int = 5 {
+    private var numBattery: Int = 3 {
         didSet {
             numBatteryLabel.text = "\(numBattery)"
         }

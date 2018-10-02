@@ -17,6 +17,8 @@ class ScoreScene: SKScene {
     
     var sceneManagerDelegate: SceneManagerDelegate?
     
+    var playInterstitialAdDelegate: PlayInterstitialAdDelegate?
+    
     // Will be set by GameScene
     var currentScore: Int = 0
     
@@ -108,6 +110,12 @@ class ScoreScene: SKScene {
     }
     
     func buttonClicked(index: Int) {
+        
+        // Play an interstitialAd first
+        if checkIfInterstitialAdAvailable() {
+            playInterstitialAdDelegate?.playInterstitialAd()
+        }
+        
         switch index {
         case PopupButton.home:
             sceneManagerDelegate?.presentMenuScene()
@@ -116,5 +124,11 @@ class ScoreScene: SKScene {
         default:
             break
         }
+    }
+    
+    private func checkIfInterstitialAdAvailable() -> Bool {
+        
+        return playInterstitialAdDelegate?.checkIfInterstitialAdAvailable() ?? false
+        
     }
 }
