@@ -18,6 +18,10 @@ protocol SceneManagerDelegate {
     func presentScoreScene(currentScore: Int)
 }
 
+protocol PlayRewardAdDelegate {
+    func playRewardAd()
+}
+
 class GameViewController: UIViewController {
     
     
@@ -27,6 +31,7 @@ class GameViewController: UIViewController {
         addGADBanner()
         addRewardBasedAd()
     }
+    
 }
 
 extension GameViewController: SceneManagerDelegate {
@@ -40,6 +45,7 @@ extension GameViewController: SceneManagerDelegate {
     func presentGameScene() {
         let gameScene = GameScene(size: view.bounds.size)
         gameScene.sceneManagerDelegate = self
+        gameScene.playRewardAdDelegate = self
         present(scene: gameScene)
     }
     
@@ -99,7 +105,11 @@ extension GameViewController: GADBannerViewDelegate {
     }
 }
 
-extension GameViewController: GADRewardBasedVideoAdDelegate {
+extension GameViewController: GADRewardBasedVideoAdDelegate, PlayRewardAdDelegate {
+    
+    func playRewardAd() {
+        print("VC playing ad")
+    }
     
     func addRewardBasedAd() {
         let rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()

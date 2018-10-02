@@ -17,6 +17,10 @@ class GameScene: SKScene {
     
     var sceneManagerDelegate: SceneManagerDelegate?
     
+    var playRewardAdDelegate: PlayRewardAdDelegate?
+    
+    var isGamePaused = false
+    
     // Score
     var currentScore: Int = 0 {
         didSet {
@@ -25,8 +29,10 @@ class GameScene: SKScene {
     }
     private var currentScoreLabel = SKLabelNode(text: "\(0)")
     
+    private var isSecondLife = false
+    
     // Game over if no batteries left
-    private var numBattery: Int = 10 {
+    private var numBattery: Int = 5 {
         didSet {
             numBatteryLabel.text = "\(numBattery)"
         }
@@ -203,11 +209,40 @@ class GameScene: SKScene {
     
     func updateScoreAndGameState() {
         
-        numBattery -= 1
+        if !isGamePaused {
+            numBattery -= 1
+        }
         
         if numBattery < 1 {
-            sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
+            
+            if isSecondLife {
+                sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
+            } else {
+                presentGetSecondLifePopup()
+            }
         }
+    }
+    
+    private func presentGetSecondLifePopup() {
+        
+        guard let view = self.view else { return }
+        
+        // Pause game
+        isGamePaused = true
+        self.isUserInteractionEnabled = false
+        
+        let playVideoButton = SpriteKitButton(buttonImage: ImageNames.noAdsButton, action: playRewardAds, caseId: 0)
+        playVideoButton.position = view.playRewardAdsButtonPosition
+        playVideoButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.playRewardAdsButton)
+        playVideoButton.zPosition = ZPositions.hudLabel
+        addChild(playVideoButton)
+    }
+    
+    
+    private func playRewardAds(_: Int) {
+        
+        playRewardAdDelegate?.playRewardAd()
+        
     }
     
     func fireLazer() {

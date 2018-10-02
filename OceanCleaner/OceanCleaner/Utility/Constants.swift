@@ -66,6 +66,7 @@ struct AspectScaleMultiplier {
     static let lazer: CGFloat = 0.1
     static let batteryIcon: CGFloat = 0.09
     static let garbageIcon: CGFloat = 0.1
+    static let playRewardAdsButton: CGFloat = 0.1
     
     // Score Scene
     static let scoreBoard: CGFloat = 0.75
@@ -78,6 +79,7 @@ struct GoogleAdmobValues {
     static let BannerAdUnitID = "ca-app-pub-3910607987474251/9986271397"
     
     static let RewardAdUnitID = "ca-app-pub-3910607987474251/9989563835"
+    
 }
 
 struct InAppPurchases {
@@ -131,6 +133,10 @@ extension SKView {
     
     var garbageIconPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.9, y: bounds.maxY * 0.85)
+    }
+    
+    var playRewardAdsButtonPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.5)
     }
     
     // Score Scene
