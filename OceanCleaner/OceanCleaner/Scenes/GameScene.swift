@@ -21,6 +21,8 @@ class GameScene: SKScene {
     
     var isGamePaused = false
     
+    var playVideoButton: SpriteKitButton?
+    
     // Score
     var currentScore: Int = 0 {
         didSet {
@@ -211,14 +213,14 @@ class GameScene: SKScene {
         
         if !isGamePaused {
             numBattery -= 1
-        }
-        
-        if numBattery < 1 {
             
-            if isSecondLife {
-                sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
-            } else {
-                presentGetSecondLifePopup()
+            if numBattery < 1 {
+                
+                if isSecondLife {
+                    sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
+                } else {
+                    presentGetSecondLifePopup()
+                }
             }
         }
     }
@@ -231,15 +233,15 @@ class GameScene: SKScene {
         isGamePaused = true
         self.isUserInteractionEnabled = false
         
-        let playVideoButton = SpriteKitButton(buttonImage: ImageNames.noAdsButton, action: playRewardAds, caseId: 0)
-        playVideoButton.position = view.playRewardAdsButtonPosition
-        playVideoButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.playRewardAdsButton)
-        playVideoButton.zPosition = ZPositions.hudLabel
-        addChild(playVideoButton)
+        playVideoButton = SpriteKitButton(buttonImage: ImageNames.noAdsButton, action: playRewardAds, caseId: 0)
+        playVideoButton?.position = view.playRewardAdsButtonPosition
+        playVideoButton?.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.playRewardAdsButton)
+        playVideoButton?.zPosition = ZPositions.hudLabel
+        addChild(playVideoButton!)
         
         if !checkIfRewardAdAvailable() {
-            playVideoButton.isUserInteractionEnabled = false
-            playVideoButton.alpha = 0.5
+            playVideoButton?.isUserInteractionEnabled = false
+            playVideoButton?.alpha = 0.5
             self.run(SKAction.sequence([
                 SKAction.wait(forDuration: RewardAdConstant.adNotAvailableWaitTime),
                 SKAction.run{ self.sceneManagerDelegate?.presentScoreScene(currentScore: self.currentScore) }
@@ -257,6 +259,16 @@ class GameScene: SKScene {
     private func playRewardAds(_: Int) {
         
         playRewardAdDelegate?.playRewardAd()
+        
+    }
+    
+    func rewardUserForWatchingAd() {
+        
+        numBattery += 10
+        self.isUserInteractionEnabled = true
+        isGamePaused = false
+        isSecondLife = true
+        playVideoButton?.removeFromParent()
         
     }
     

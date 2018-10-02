@@ -134,6 +134,8 @@ extension GameViewController: GADRewardBasedVideoAdDelegate, PlayRewardAdDelegat
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
                             didRewardUserWith reward: GADAdReward) {
         print("Reward received with currency: \(reward.type), amount \(reward.amount).")
+        
+        gameScene?.rewardUserForWatchingAd()
     }
     
     func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd:GADRewardBasedVideoAd) {
