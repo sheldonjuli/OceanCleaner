@@ -101,6 +101,11 @@ struct LazerConstant {
     
 }
 
+struct RewardAdConstant {
+    static let adAvailableWaitTime = 5.0
+    static let adNotAvailableWaitTime = 3.0
+}
+
 extension SKView {
     
     var sceneBackgroundPosition: CGPoint {

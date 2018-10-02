@@ -236,6 +236,21 @@ class GameScene: SKScene {
         playVideoButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.playRewardAdsButton)
         playVideoButton.zPosition = ZPositions.hudLabel
         addChild(playVideoButton)
+        
+        if !checkIfRewardAdAvailable() {
+            playVideoButton.isUserInteractionEnabled = false
+            playVideoButton.alpha = 0.5
+            self.run(SKAction.sequence([
+                SKAction.wait(forDuration: RewardAdConstant.adNotAvailableWaitTime),
+                SKAction.run{ self.sceneManagerDelegate?.presentScoreScene(currentScore: self.currentScore) }
+                ]))
+        }
+    }
+    
+    private func checkIfRewardAdAvailable() -> Bool {
+        
+        return playRewardAdDelegate?.checkIfRewardAdAvailable() ?? false
+        
     }
     
     

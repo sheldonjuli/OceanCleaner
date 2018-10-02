@@ -20,10 +20,14 @@ protocol SceneManagerDelegate {
 
 protocol PlayRewardAdDelegate {
     func playRewardAd()
+    func checkIfRewardAdAvailable() -> Bool
 }
 
 class GameViewController: UIViewController {
     
+    var rewardBasedAd: GADRewardBasedVideoAd!
+    
+    var gameScene: GameScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +47,10 @@ extension GameViewController: SceneManagerDelegate {
     }
     
     func presentGameScene() {
-        let gameScene = GameScene(size: view.bounds.size)
-        gameScene.sceneManagerDelegate = self
-        gameScene.playRewardAdDelegate = self
-        present(scene: gameScene)
+        gameScene = GameScene(size: view.bounds.size)
+        gameScene?.sceneManagerDelegate = self
+        gameScene?.playRewardAdDelegate = self
+        present(scene: gameScene!)
     }
     
     func presentScoreScene(currentScore: Int) {
@@ -107,12 +111,18 @@ extension GameViewController: GADBannerViewDelegate {
 
 extension GameViewController: GADRewardBasedVideoAdDelegate, PlayRewardAdDelegate {
     
+    func checkIfRewardAdAvailable() -> Bool {
+        return rewardBasedAd.isReady
+    }
+    
     func playRewardAd() {
-        print("VC playing ad")
+        if checkIfRewardAdAvailable() {
+            rewardBasedAd.present(fromRootViewController: self)
+        }
     }
     
     func addRewardBasedAd() {
-        let rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
+        rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
         rewardBasedAd.delegate = self
         let request = GADRequest()
         
