@@ -39,7 +39,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         presentMenuScene()
         addGADBanner()
-        addRewardBasedAd()
+        rewardBasedAd = createAndLoadRewardBasedAd()
         interstitialAd = createAndLoadInterstitial()
     }
     
@@ -98,7 +98,7 @@ extension GameViewController: GADBannerViewDelegate {
         let bannerHeight:CGFloat = 50.0
         BannerView.frame = CGRect(x: 0, y: view.bounds.maxY - bannerHeight, width: view.bounds.maxX, height: bannerHeight)
         BannerView.delegate = self
-        BannerView.adUnitID = GoogleAdmobValues.BannerAdUnitID
+        BannerView.adUnitID = GoogleAdmobValues.bannerAdUnitID
         BannerView.rootViewController = self
         BannerView.load(GADRequest())
         BannerView.backgroundColor = UIColor.black
@@ -128,14 +128,15 @@ extension GameViewController: GADRewardBasedVideoAdDelegate, PlayRewardAdDelegat
         }
     }
     
-    func addRewardBasedAd() {
-        rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
+    func createAndLoadRewardBasedAd() -> GADRewardBasedVideoAd {
+        let rewardBasedAd = GADRewardBasedVideoAd.sharedInstance()
         rewardBasedAd.delegate = self
         let request = GADRequest()
         
         // TDOD remove test code
         request.testDevices = [ "b90d517bbd126ad43c612357a349ee23" ]
-        rewardBasedAd.load(request, withAdUnitID: GoogleAdmobValues.RewardAdUnitID)
+        rewardBasedAd.load(request, withAdUnitID: GoogleAdmobValues.rewardAdUnitID)
+        return rewardBasedAd
     }
     
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd,
@@ -163,6 +164,7 @@ extension GameViewController: GADRewardBasedVideoAdDelegate, PlayRewardAdDelegat
     
     func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
         print("Reward based video ad is closed.")
+        rewardBasedAd = createAndLoadRewardBasedAd()
     }
     
     func rewardBasedVideoAdWillLeaveApplication(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {

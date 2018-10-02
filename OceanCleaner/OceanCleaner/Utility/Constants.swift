@@ -76,9 +76,9 @@ struct AspectScaleMultiplier {
 
 struct GoogleAdmobValues {
     
-    static let BannerAdUnitID = "ca-app-pub-3910607987474251/9986271397"
+    static let bannerAdUnitID = "ca-app-pub-3910607987474251/9986271397"
     
-    static let RewardAdUnitID = "ca-app-pub-3910607987474251/9989563835"
+    static let rewardAdUnitID = "ca-app-pub-3910607987474251/9989563835"
     
     static let interstitialAdUnitID = "ca-app-pub-3910607987474251/6122433022"
     
