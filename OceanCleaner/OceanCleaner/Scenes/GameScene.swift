@@ -437,8 +437,14 @@ extension GameScene: SKPhysicsContactDelegate {
             
             let oceanObject = oceanObjectBody.node as? OceanObject
             
+            // Sync with lazer retrival
+            let moveAction = SKAction.move(to: playerIconNode.position, duration: retriveDuration)
+            let shrinkAction = SKAction.scale(to: 0.1, duration: retriveDuration)
+            let rotateAction = SKAction.repeatForever(SKAction.rotate(byAngle: 2 * .pi, duration: retriveDuration))
+            let shrinkAndMoveAndRotate = SKAction.group([moveAction, shrinkAction, rotateAction])
+            
             oceanObject?.run(SKAction.sequence([
-                SKAction.move(to: playerIconNode.position, duration: retriveDuration), // Sync with lazer retrival
+                shrinkAndMoveAndRotate,
                 SKAction.removeFromParent()
                 ]))
             
