@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+struct CommonValue {
+    static let dontCare = 0
+}
+
 struct ImageNames {
     
     // Menu Scene
@@ -21,6 +25,7 @@ struct ImageNames {
     static let lazer = "lazer"
     static let batteryIcon = "batteryIcon"
     static let garbageIcon = "garbageIcon"
+    static let cancelButton = "cancelButton"
     
     // Score Scene
     static let scoreSceneBackground = "scoreSceneBackground"
@@ -67,6 +72,7 @@ struct AspectScaleMultiplier {
     static let batteryIcon: CGFloat = 0.09
     static let garbageIcon: CGFloat = 0.1
     static let playRewardAdsButton: CGFloat = 0.1
+    static let cancelButton: CGFloat = 0.1
     
     // Score Scene
     static let scoreBoard: CGFloat = 0.75
@@ -144,6 +150,10 @@ extension SKView {
     
     var playRewardAdsButtonPosition: CGPoint {
         return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.5)
+    }
+    
+    var cancelButtonPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.4)
     }
     
     // Score Scene

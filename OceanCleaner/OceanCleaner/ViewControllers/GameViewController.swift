@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
     var interstitialAd: GADInterstitial!
     
     var gameScene: GameScene?
+    var scoreScene: ScoreScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +62,11 @@ extension GameViewController: SceneManagerDelegate {
     }
     
     func presentScoreScene(currentScore: Int) {
-        let scoreScene = ScoreScene(size: view.bounds.size)
-        scoreScene.currentScore = currentScore
-        scoreScene.sceneManagerDelegate = self
-        present(scene: scoreScene)
+        scoreScene = ScoreScene(size: view.bounds.size)
+        scoreScene?.currentScore = currentScore
+        scoreScene?.sceneManagerDelegate = self
+        scoreScene?.playInterstitialAdDelegate = self
+        present(scene: scoreScene!)
     }
     
     func present(scene: SKScene) {

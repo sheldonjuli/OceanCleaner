@@ -217,7 +217,7 @@ class GameScene: SKScene {
             if numBattery < 1 {
                 
                 if isSecondLife {
-                    sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
+                    presentScoreScene(CommonValue.dontCare)
                 } else {
                     presentGetSecondLifePopup()
                 }
@@ -239,14 +239,27 @@ class GameScene: SKScene {
         playVideoButton?.zPosition = ZPositions.hudLabel
         addChild(playVideoButton!)
         
+        let cancelButton = SpriteKitButton(buttonImage: ImageNames.cancelButton, action: presentScoreScene, caseId: CommonValue.dontCare)
+        cancelButton.position = view.cancelButtonPosition
+        cancelButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.cancelButton)
+        cancelButton.zPosition = ZPositions.hudLabel
+        addChild(cancelButton)
+        
+        
         if !checkIfRewardAdAvailable() {
             playVideoButton?.isUserInteractionEnabled = false
             playVideoButton?.alpha = 0.5
             self.run(SKAction.sequence([
                 SKAction.wait(forDuration: RewardAdConstant.adNotAvailableWaitTime),
-                SKAction.run{ self.sceneManagerDelegate?.presentScoreScene(currentScore: self.currentScore) }
+                SKAction.run{ self.presentScoreScene(CommonValue.dontCare) }
                 ]))
         }
+    }
+    
+    private func presentScoreScene(_: Int) {
+        
+        sceneManagerDelegate?.presentScoreScene(currentScore: currentScore)
+        
     }
     
     private func checkIfRewardAdAvailable() -> Bool {
