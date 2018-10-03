@@ -351,23 +351,16 @@ class GameScene: SKScene {
      */
     func createOceanObjects(every second: Double) {
         
-        self.run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run{ self.createOceanObjects() },
-            SKAction.wait(forDuration: second)
-            ])))
-        
-    }
-    
-    func createOceanObjects() {
-        
         guard let view = view else { return }
         
-        let numOceanObjects = randomInt(from: 2, to: 4)
-        
-        for _ in 0..<numOceanObjects {
-            addChild(OceanObject(level: 1, view: view))
-        }
-        
+        self.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run{
+                let numOceanObjects = randomInt(from: 2, to: 4)
+                for _ in 0..<numOceanObjects {
+                    self.addChild(OceanObject(level: 1, view: view))
+                }},
+            SKAction.wait(forDuration: second)
+            ])))
     }
     
     /**
