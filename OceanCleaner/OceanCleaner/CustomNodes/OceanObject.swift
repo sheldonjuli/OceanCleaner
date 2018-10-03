@@ -40,28 +40,41 @@ class OceanObject: SKSpriteNode {
      
      - Parameter level: will be used to determine the swap rate of different types of objects.
      */
-    init(level: Int) {
+    init(level: Int, view: SKView) {
         
         let oceanObjectSize = CGSize(width: 50.0, height: 50.0)
         
         var imageName = ""
+        var aspectScaleMultiplier = CGFloat(0.0)
         
         let threshold = CGFloat(level) / 5 + 0.5
         if randomCGFloat(from: 0, to: 1) < threshold {
             oceanObjectType = .fish
             let randomIndex = randomInt(from: 0, to: fishes.count - 1)
             imageName = fishes[randomIndex].rawValue
+            aspectScaleMultiplier = AspectScaleMultiplier.fish
         } else {
             oceanObjectType = .garbage
             let randomIndex = randomInt(from: 0, to: garbages.count - 1)
             imageName = garbages[randomIndex].rawValue
+            aspectScaleMultiplier = AspectScaleMultiplier.garbage
         }
         
         let oceanObjectNode = SKSpriteNode(imageNamed: imageName)
         
         // TODO: different objects will have different sizes
-        oceanObjectNode.size = CGSize(width: 70.0, height: 50.0)
+        oceanObjectNode.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: aspectScaleMultiplier)
         oceanObjectNode.zPosition = ZPositions.oceanObject
+        
+        let rotateLeft = SKAction.rotate(byAngle: -0.015, duration: 0.1)
+        let rotateRight = SKAction.rotate(byAngle: 0.015, duration: 0.1)
+        let shakeAction = SKAction.repeatForever(SKAction.sequence([
+            rotateLeft,
+            rotateLeft.reversed(),
+            rotateRight,
+            rotateRight.reversed()
+            ]))
+        oceanObjectNode.run(shakeAction)
         
         super.init(texture: nil, color: .clear, size: oceanObjectSize)
         

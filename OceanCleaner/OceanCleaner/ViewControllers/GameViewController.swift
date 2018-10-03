@@ -87,7 +87,7 @@ extension GameViewController: SceneManagerDelegate {
             // Debug code
             view.showsFPS = true
             view.showsNodeCount = true
-            view.showsPhysics = true
+            //view.showsPhysics = true
         }
     }
 }

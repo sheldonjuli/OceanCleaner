@@ -373,7 +373,7 @@ class GameScene: SKScene {
         
         for _ in 0..<numOceanObjects {
             
-            let oceanObject = OceanObject(level: 1)
+            let oceanObject = OceanObject(level: 1, view: view)
             
             // Randomly swap at left edge or right
             let fromLeft = randomInt(from: 0, to: 1)

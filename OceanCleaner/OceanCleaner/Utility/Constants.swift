@@ -74,6 +74,9 @@ struct AspectScaleMultiplier {
     static let playRewardAdsButton: CGFloat = 0.1
     static let cancelButton: CGFloat = 0.1
     
+    static let fish: CGFloat = 0.1
+    static let garbage: CGFloat = 0.075
+    
     // Score Scene
     static let scoreBoard: CGFloat = 0.75
     static let homeButton: CGFloat = 0.1
