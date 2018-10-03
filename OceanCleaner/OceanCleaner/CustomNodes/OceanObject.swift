@@ -66,17 +66,9 @@ class OceanObject: SKSpriteNode {
         oceanObjectNode.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: aspectScaleMultiplier)
         oceanObjectNode.zPosition = ZPositions.oceanObject
         
-        let rotateLeft = SKAction.rotate(byAngle: -0.015, duration: 0.1)
-        let rotateRight = SKAction.rotate(byAngle: 0.015, duration: 0.1)
-        let shakeAction = SKAction.repeatForever(SKAction.sequence([
-            rotateLeft,
-            rotateLeft.reversed(),
-            rotateRight,
-            rotateRight.reversed()
-            ]))
-        oceanObjectNode.run(shakeAction)
-        
         super.init(texture: nil, color: .clear, size: oceanObjectSize)
+        
+        oceanObjectNode.run(SKAction().rotateLeftAndRightForever(by: 0.015, duration: 0.1))
         
         physicsBody = SKPhysicsBody(rectangleOf: oceanObjectNode.size)
         physicsBody!.categoryBitMask = oceanObjectType == .fish ? PhysicsCategories.fish : PhysicsCategories.garbage

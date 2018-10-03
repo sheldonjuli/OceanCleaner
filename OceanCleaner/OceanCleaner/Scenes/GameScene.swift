@@ -48,14 +48,7 @@ class GameScene: SKScene {
     private let lazer = SKSpriteNode(imageNamed: ImageNames.lazer)
     
     private var lazerRotation: SKAction {
-        let rotateLeft = SKAction.rotate(byAngle: -0.25 * .pi, duration: 1)
-        let rotateRight = SKAction.rotate(byAngle: 0.25 * .pi, duration: 1)
-        return SKAction.repeatForever(SKAction.sequence([
-            rotateLeft,
-            rotateLeft.reversed(),
-            rotateRight,
-            rotateRight.reversed()
-            ]))
+        return SKAction().rotateLeftAndRightForever(by: 0.6, duration: 1)
     }
     
     private var lazerState = LazerState.idle
