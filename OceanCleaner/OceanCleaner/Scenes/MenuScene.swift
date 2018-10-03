@@ -34,6 +34,19 @@ class MenuScene: SKScene {
         noAdsButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.noAdsButton)
         noAdsButton.zPosition = ZPositions.hudLabel
         addChild(noAdsButton)
+        
+        let tapToStartNode = SKSpriteNode(imageNamed: ImageNames.tapToStartImg)
+        tapToStartNode.position = view.tapToStartImgPosition
+        tapToStartNode.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.tapToStartImg)
+        tapToStartNode.zPosition = ZPositions.hudLabel
+        addChild(tapToStartNode)
+        
+        let zoomOut = SKAction.scale(by: 2, duration: 1)
+        let zoomInAndOut = SKAction.repeatForever(SKAction.sequence([
+            zoomOut,
+            zoomOut.reversed()
+            ]))
+        tapToStartNode.run(zoomInAndOut)
     }
     
     

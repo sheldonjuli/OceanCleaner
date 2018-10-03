@@ -16,6 +16,8 @@ enum OceanObjectType {
 enum FishTypes: String {
     case clown = "clown"
     case balloon = "balloon"
+    case red = "red"
+    case grey = "grey"
 }
 
 enum GarbageTypes: String {
@@ -28,7 +30,7 @@ enum GarbageTypes: String {
  */
 class OceanObject: SKSpriteNode {
     
-    let fishes = [FishTypes.clown, .balloon]
+    let fishes = [FishTypes.red, .grey]
     let garbages = [GarbageTypes.shoe, .can]
     
     var oceanObjectType: OceanObjectType

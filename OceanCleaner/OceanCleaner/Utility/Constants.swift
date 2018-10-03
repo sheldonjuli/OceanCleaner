@@ -16,8 +16,8 @@ struct ImageNames {
     
     // Menu Scene
     static let menuSceneBackground = "menuSceneBackground"
-    static let startButton = "startButton"
     static let noAdsButton = "noAdsButton"
+    static let tapToStartImg = "tapToStartImg"
     
     // Game Scene
     static let gameSceneBackground = "gameSceneBackground"
@@ -63,7 +63,7 @@ struct AspectScaleMultiplier {
     static let popup: CGFloat = 0.75
     
     // Menu Scene
-    static let startButton: CGFloat = 0.2
+    static let tapToStartImg: CGFloat = 0.2
     static let noAdsButton: CGFloat = 0.1
     
     // Game Scene
@@ -122,8 +122,8 @@ extension SKView {
     
     // Menu Scene
     
-    var startButtonPosition: CGPoint {
-        return CGPoint(x: bounds.midX, y: bounds.midY * 0.8)
+    var tapToStartImgPosition: CGPoint {
+        return CGPoint(x: bounds.midX, y: bounds.midY)
     }
     
     var noAdsButtonPosition: CGPoint {
