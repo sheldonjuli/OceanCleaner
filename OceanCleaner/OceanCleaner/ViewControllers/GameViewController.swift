@@ -227,6 +227,7 @@ extension GameViewController: GADInterstitialDelegate, PlayInterstitialAdDelegat
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         print("interstitialDidDismissScreen")
         interstitialAd = createAndLoadInterstitial()
+        scoreScene?.presentScene()
     }
     
     /// Tells the delegate that a user click will open another app

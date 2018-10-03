@@ -22,6 +22,7 @@ class GameScene: SKScene {
     var isGamePaused = false
     
     var playVideoButton: SpriteKitButton?
+    var cancelButton: SpriteKitButton?
     
     // Score
     var currentScore: Int = 0 {
@@ -34,7 +35,7 @@ class GameScene: SKScene {
     private var isSecondLife = false
     
     // Game over if no batteries left
-    private var numBattery: Int = 3 {
+    private var numBattery: Int = 10 {
         didSet {
             numBatteryLabel.text = "\(numBattery)"
         }
@@ -239,11 +240,11 @@ class GameScene: SKScene {
         playVideoButton?.zPosition = ZPositions.hudLabel
         addChild(playVideoButton!)
         
-        let cancelButton = SpriteKitButton(buttonImage: ImageNames.cancelButton, action: presentScoreScene, caseId: CommonValue.dontCare)
-        cancelButton.position = view.cancelButtonPosition
-        cancelButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.cancelButton)
-        cancelButton.zPosition = ZPositions.hudLabel
-        addChild(cancelButton)
+        cancelButton = SpriteKitButton(buttonImage: ImageNames.cancelButton, action: presentScoreScene, caseId: CommonValue.dontCare)
+        cancelButton?.position = view.cancelButtonPosition
+        cancelButton?.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.cancelButton)
+        cancelButton?.zPosition = ZPositions.hudLabel
+        addChild(cancelButton!)
         
         
         if !checkIfRewardAdAvailable() {
@@ -282,6 +283,7 @@ class GameScene: SKScene {
         isGamePaused = false
         isSecondLife = true
         playVideoButton?.removeFromParent()
+        cancelButton?.removeFromParent()
         
     }
     

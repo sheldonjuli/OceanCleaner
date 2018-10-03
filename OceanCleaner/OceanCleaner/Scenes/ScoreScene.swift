@@ -16,6 +16,7 @@ struct PopupButton {
 class ScoreScene: SKScene {
     
     var sceneManagerDelegate: SceneManagerDelegate?
+    private var nextSceneIndex = PopupButton.home
     
     var playInterstitialAdDelegate: PlayInterstitialAdDelegate?
     
@@ -109,14 +110,24 @@ class ScoreScene: SKScene {
         addChild(retryButton)
     }
     
-    func buttonClicked(index: Int) {
+    func buttonClicked(sceneIndex: Int) {
+        
+        nextSceneIndex = sceneIndex
         
         // Play an interstitialAd first
+        // If an ad is being played, present scene only after the ad has been closed
+        // GameViewController.interstitialDidDismissScreen() will handle this case
         if checkIfInterstitialAdAvailable() {
             playInterstitialAdDelegate?.playInterstitialAd()
+        } else {
+            presentScene()
         }
         
-        switch index {
+    }
+    
+    func presentScene() {
+        
+        switch nextSceneIndex {
         case PopupButton.home:
             sceneManagerDelegate?.presentMenuScene()
         case PopupButton.retry:
@@ -124,6 +135,7 @@ class ScoreScene: SKScene {
         default:
             break
         }
+        
     }
     
     private func checkIfInterstitialAdAvailable() -> Bool {
