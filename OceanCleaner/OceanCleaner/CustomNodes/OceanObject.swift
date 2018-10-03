@@ -75,6 +75,24 @@ class OceanObject: SKSpriteNode {
         physicsBody!.collisionBitMask = PhysicsCategories.none
         physicsBody!.contactTestBitMask = PhysicsCategories.lazer
         
+        // Randomly swap at left edge or right
+        let fromLeft = randomInt(from: 0, to: 1)
+        position.x = fromLeft == 1 ? -100 : view.bounds.maxX + 100
+        position.y = randomCGFloat(from: 50.0, to: view.bounds.maxY - 300)
+        
+        let lowerSpeed = view.bounds.width / 4
+        let higherSpeed = view.bounds.width / 2
+        
+        if position.x < view.bounds.midX {
+            
+            // All fish textures are facing left
+            xScale *= -1
+            physicsBody!.velocity.dx = randomCGFloat(from: lowerSpeed, to: higherSpeed)
+            
+        } else {
+            physicsBody!.velocity.dx = randomCGFloat(from: -lowerSpeed, to: -higherSpeed)
+        }
+        
         addChild(oceanObjectNode)
         
     }

@@ -365,26 +365,7 @@ class GameScene: SKScene {
         let numOceanObjects = randomInt(from: 2, to: 4)
         
         for _ in 0..<numOceanObjects {
-            
-            let oceanObject = OceanObject(level: 1, view: view)
-            
-            // Randomly swap at left edge or right
-            let fromLeft = randomInt(from: 0, to: 1)
-            oceanObject.position.x = fromLeft == 1 ? -100 : view.bounds.maxX + 100
-            oceanObject.position.y = randomCGFloat(from: 10.0, to: view.bounds.maxY - 300)
-            
-            if oceanObject.position.x < view.bounds.midX {
-                
-                oceanObject.physicsBody?.velocity.dx = randomCGFloat(from: 100.0, to: 300.0)
-                
-                // All fish textures are facing left
-                oceanObject.xScale *= -1
-                
-            } else {
-                oceanObject.physicsBody?.velocity.dx = randomCGFloat(from: -100.0, to: -300.0)
-            }
-            
-            addChild(oceanObject)
+            addChild(OceanObject(level: 1, view: view))
         }
         
     }
