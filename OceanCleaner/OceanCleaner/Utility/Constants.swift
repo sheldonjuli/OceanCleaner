@@ -165,6 +165,10 @@ extension SKView {
         return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.4)
     }
     
+    var showScoreChangeLabelPosition: CGPoint {
+        return CGPoint(x: bounds.maxX * 0.5, y: bounds.maxY * 0.5)
+    }
+    
     // Score Scene
     
     var scoreBoardPosition: CGPoint {

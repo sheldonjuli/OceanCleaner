@@ -15,6 +15,7 @@ enum LazerState {
 
 class GameScene: SKScene {
     
+    // MARK: Fields
     var sceneManagerDelegate: SceneManagerDelegate?
     
     var playRewardAdDelegate: PlayRewardAdDelegate?
@@ -58,6 +59,11 @@ class GameScene: SKScene {
     // Scene animations
     private var bubbles = [Bubble]()
     
+    private var showScoreIncreaseLabel = SKLabelNode(text: "+10")
+    private var showScoreDecreaseLabel = SKLabelNode(text: "-10")
+    
+    
+    // MARK: Methods
     override func didMove(to view: SKView) {
         
         setupPhysics()
@@ -65,6 +71,7 @@ class GameScene: SKScene {
         addPlayerNode(view: view)
         addLazer(view: view)
         addHudLabels(view: view)
+        addScoreChangeNode(view: view)
         
         animateBubble(every: 0.2)
         createOceanObjects(every: 0.33)
@@ -191,6 +198,29 @@ class GameScene: SKScene {
         
     }
     
+    private func addScoreChangeNode(view: SKView) {
+        
+        let labelFontName = "ChalkboardSE-Bold"
+        let labelFontSize = view.bounds.width * 0.1
+        
+        showScoreIncreaseLabel.fontName = labelFontName
+        showScoreIncreaseLabel.fontSize = labelFontSize
+        showScoreIncreaseLabel.fontColor = .white
+        showScoreIncreaseLabel.position = view.showScoreChangeLabelPosition
+        showScoreIncreaseLabel.zPosition = ZPositions.hudLabel
+        showScoreIncreaseLabel.isHidden = true
+        addChild(showScoreIncreaseLabel)
+        
+        showScoreDecreaseLabel.fontName = labelFontName
+        showScoreDecreaseLabel.fontSize = labelFontSize
+        showScoreDecreaseLabel.fontColor = .white
+        showScoreDecreaseLabel.position = view.showScoreChangeLabelPosition
+        showScoreDecreaseLabel.zPosition = ZPositions.hudLabel
+        showScoreDecreaseLabel.isHidden = true
+        addChild(showScoreDecreaseLabel)
+        
+    }
+    
     /**
      Repetitively call updateScoreAndGameState() to update the score and game state.
      
@@ -209,6 +239,9 @@ class GameScene: SKScene {
         
         if !isGamePaused {
             numBattery -= 1
+            
+            // min battery shouldn't go below 0
+            numBattery = numBattery < 0 ? 0 : numBattery
             
             if numBattery < 1 {
                 
@@ -362,13 +395,13 @@ class GameScene: SKScene {
     }
     
     private func getLevel() -> Int {
-
+        
         var level = Double(GamePlayConstant.maxLevel)
         if currentScore < GamePlayConstant.maxScoreForLevelCalculation {
             
             level = Double(currentScore) / (Double(GamePlayConstant.maxScoreForLevelCalculation) / Double(GamePlayConstant.maxLevel))
         }
-
+        
         return Int(level)
         
     }
@@ -428,14 +461,11 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
-        //var lazerBody = SKPhysicsBody()
         var oceanObjectBody = SKPhysicsBody()
         
         if contact.bodyA.categoryBitMask == PhysicsCategories.lazer {
-            //lazerBody = contact.bodyA
             oceanObjectBody = contact.bodyB
         } else {
-            //lazerBody = contact.bodyB
             oceanObjectBody = contact.bodyA
         }
         
@@ -458,14 +488,38 @@ extension GameScene: SKPhysicsContactDelegate {
                 SKAction.removeFromParent()
                 ]))
             
+            var scoreChangeAction = SKAction()
+            var hideScoreChangeLabelAction = SKAction()
             if oceanObject?.oceanObjectType == OceanObjectType.garbage {
                 
-                self.run(SKAction.sequence([
-                    SKAction.wait(forDuration: retriveDuration), // Sync with lazer retrival
-                    SKAction.run{ self.numBattery += 10; self.currentScore += 1 }
-                    ]))
+                scoreChangeAction = SKAction.run {
+                    self.numBattery += 10
+                    self.currentScore += 1
+                    self.showScoreIncreaseLabel.isHidden = false
+                }
+                hideScoreChangeLabelAction = SKAction.run {
+                    self.showScoreIncreaseLabel.isHidden = true
+                }
+                
+            } else {
+                
+                scoreChangeAction = SKAction.run {
+                    // min battery shouldn't go below 0
+                    self.numBattery -= min(10, self.numBattery - 1)
+                    self.showScoreDecreaseLabel.isHidden = false
+                }
+                hideScoreChangeLabelAction = SKAction.run {
+                    self.showScoreDecreaseLabel.isHidden = true
+                }
                 
             }
+            
+            self.run(SKAction.sequence([
+                SKAction.wait(forDuration: retriveDuration), // Sync with lazer retrival
+                scoreChangeAction,
+                SKAction.wait(forDuration: 0.5),
+                hideScoreChangeLabelAction
+                ]))
         }
     }
 }
