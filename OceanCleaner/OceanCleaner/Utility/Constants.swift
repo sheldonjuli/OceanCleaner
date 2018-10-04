@@ -12,6 +12,12 @@ struct CommonValue {
     static let dontCare = 0
 }
 
+struct GamePlayConstant {
+    static let maxLevel: Int = 10
+    static let maxScoreForLevelCalculation: Int = 30
+    static let startingBatteryNum: Int = 30
+}
+
 struct ImageNames {
     
     // Menu Scene

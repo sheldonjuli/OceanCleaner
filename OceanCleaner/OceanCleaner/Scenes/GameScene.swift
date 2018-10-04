@@ -25,9 +25,11 @@ class GameScene: SKScene {
     var cancelButton: SpriteKitButton?
     
     // Score
+    var currentLevel = 0
     var currentScore: Int = 0 {
         didSet {
             currentScoreLabel.text = "\(currentScore)"
+            currentLevel = getLevel()
         }
     }
     private var currentScoreLabel = SKLabelNode(text: "\(0)")
@@ -35,7 +37,7 @@ class GameScene: SKScene {
     private var isSecondLife = false
     
     // Game over if no batteries left
-    private var numBattery: Int = 10 {
+    private var numBattery: Int = GamePlayConstant.startingBatteryNum {
         didSet {
             numBatteryLabel.text = "\(numBattery)"
         }
@@ -65,7 +67,7 @@ class GameScene: SKScene {
         addHudLabels(view: view)
         
         animateBubble(every: 0.2)
-        createOceanObjects(every: 2.0)
+        createOceanObjects(every: 0.33)
         updateScoreAndGameState(every: 1.0)
         
     }
@@ -354,13 +356,21 @@ class GameScene: SKScene {
         guard let view = view else { return }
         
         self.run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run{
-                let numOceanObjects = randomInt(from: 2, to: 4)
-                for _ in 0..<numOceanObjects {
-                    self.addChild(OceanObject(level: 1, view: view))
-                }},
+            SKAction.run{ self.addChild(OceanObject(level: self.currentLevel, view: view)) },
             SKAction.wait(forDuration: second)
             ])))
+    }
+    
+    private func getLevel() -> Int {
+
+        var level = Double(GamePlayConstant.maxLevel)
+        if currentScore < GamePlayConstant.maxScoreForLevelCalculation {
+            
+            level = Double(currentScore) / (Double(GamePlayConstant.maxScoreForLevelCalculation) / Double(GamePlayConstant.maxLevel))
+        }
+
+        return Int(level)
+        
     }
     
     /**

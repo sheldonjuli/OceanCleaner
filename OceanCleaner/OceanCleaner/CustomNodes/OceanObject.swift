@@ -48,7 +48,9 @@ class OceanObject: SKSpriteNode {
         var imageName = ""
         var aspectScaleMultiplier = CGFloat(0.0)
         
-        let threshold = CGFloat(level) / 5 + 0.5
+        // fish swap rate between 0.5 - 0.9
+        let threshold = CGFloat(CGFloat(level) / CGFloat(GamePlayConstant.maxLevel)) * 0.4 + 0.5
+        print(level, threshold)
         if randomCGFloat(from: 0, to: 1) < threshold {
             oceanObjectType = .fish
             let randomIndex = randomInt(from: 0, to: fishes.count - 1)
