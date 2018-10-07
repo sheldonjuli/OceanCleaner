@@ -81,7 +81,7 @@ class OceanObject: SKSpriteNode {
         // Randomly swap at left edge or right
         let fromLeft = randomInt(from: 0, to: 1)
         position.x = fromLeft == 1 ? -100 : view.bounds.maxX + 100
-        position.y = randomCGFloat(from: 50.0, to: view.bounds.maxY - 300)
+        position.y = randomCGFloat(from: view.bounds.maxY * 0.1, to: view.bounds.maxY * 0.65)
         
         let lowerSpeed = view.bounds.width / 4
         let higherSpeed = view.bounds.width / 2
