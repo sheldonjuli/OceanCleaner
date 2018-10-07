@@ -421,24 +421,31 @@ class GameScene: SKScene {
     }
     
     func addBubbles() {
-        addBubble(on: BubbleLayer.one, at: CGPoint(x: 100, y: 100))
-        addBubble(on: BubbleLayer.one, at: CGPoint(x: 500, y: 100))
-        addBubble(on: BubbleLayer.two, at: CGPoint(x: 200, y: 200))
-        addBubble(on: BubbleLayer.two, at: CGPoint(x: 350, y: 200))
+        
+        guard let view = view else { return }
+        
+        addBubble(in: view, on: BubbleLayer.one, at: CGPoint(x: view.bounds.width * 0.25, y: 0))
+        addBubble(in: view, on: BubbleLayer.two, at: CGPoint(x: view.bounds.width * 0.55, y: view.bounds.height * 0.125))
+        addBubble(in: view, on: BubbleLayer.three, at: CGPoint(x: view.bounds.width * 0.75, y: view.bounds.height * 0.1))
     }
     
-    func addBubble(on layer: BubbleLayer, at position: CGPoint) {
-        let bubble = Bubble(on: layer)
+    func addBubble(in view: SKView, on layer: BubbleLayer, at position: CGPoint) {
+        let bubble = Bubble(in: view, on: layer)
         bubble.position = position
         bubbles.append(bubble)
         addChild(bubble)
     }
     
     func floatBubbles() {
+        
+        guard let view = view else { return }
+        
+        let distance: CGFloat = view.bounds.width * 0.05
+        
         for bubble in bubbles {
             
-            let xOffset: CGFloat = CGFloat(arc4random_uniform(20)) - 10.0
-            let yOffset: CGFloat = 20.0
+            let xOffset: CGFloat = CGFloat(arc4random_uniform(UInt32(distance))) - distance / 2
+            let yOffset: CGFloat = distance
             let newLocation = CGPoint(x: bubble.position.x + xOffset, y: bubble.position.y + yOffset)
             let moveAction = SKAction.move(to: newLocation, duration: 0.2)
             bubble.run(moveAction)

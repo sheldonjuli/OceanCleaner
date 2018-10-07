@@ -13,9 +13,9 @@ enum BubbleLayer {
 }
 
 struct BubbleColor {
+    static let LightBlue = "42D8B2"
     static let DarkBlue = "172E50"
     static let MidBlue = "1689A6"
-    static let LightBlue = ""
 }
 
 class Bubble: SKSpriteNode {
@@ -28,27 +28,29 @@ class Bubble: SKSpriteNode {
      
      - Parameter layer: used to match color to the background.
      */
-    init(on layer: BubbleLayer) {
+    init(in view: SKView, on layer: BubbleLayer) {
         
-        lifeRemain = randomInt(from: 5, to: 20)
+        lifeRemain = randomInt(from: 5, to: 15)
         
         var bubbleColor = UIColor.white
         
         switch layer {
         case .one:
-            bubbleColor = UIColor(hex: BubbleColor.DarkBlue)
-        case .two:
-            bubbleColor = UIColor(hex: BubbleColor.MidBlue)
-        case.three:
             bubbleColor = UIColor(hex: BubbleColor.LightBlue)
+        case .two:
+            bubbleColor = UIColor(hex: BubbleColor.DarkBlue)
+        case.three:
+            bubbleColor = UIColor(hex: BubbleColor.MidBlue)
         }
         
-        let bubble = SKShapeNode(circleOfRadius: 5.0)
+        let radius = view.bounds.width * 0.01
+        let bubble = SKShapeNode(circleOfRadius: radius)
         bubble.fillColor = bubbleColor
         bubble.strokeColor = UIColor.clear
+        bubble.alpha = 0.25
         bubble.zPosition = ZPositions.oceanObject
         
-        super.init(texture: nil, color: .clear, size: CGSize(width: 10, height: 10))
+        super.init(texture: nil, color: .clear, size: CGSize(width: 2 * radius, height: 2 * radius))
         
         addChild(bubble)
         
