@@ -26,7 +26,7 @@ class MenuScene: SKScene {
     
     func setupMenu(view: SKView) {
         
-        let menuSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.menuSceneBackground)
+        let menuSceneBackground = SpriteKitSceneBackground(view: view)
         addChild(menuSceneBackground)
         
         let noAdsButton = SpriteKitButton(buttonImage: ImageNames.noAdsButton, action: goToInAppPurchase, caseId: 0)

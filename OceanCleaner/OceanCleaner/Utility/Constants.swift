@@ -20,13 +20,16 @@ struct GamePlayConstant {
 
 struct ImageNames {
     
+    // Shared
+    static let wave1 = "wave1"
+    static let wave2 = "wave2"
+    static let sceneBackground = "sceneBackground"
+    
     // Menu Scene
-    static let menuSceneBackground = "menuSceneBackground"
     static let noAdsButton = "noAdsButton"
     static let tapToStartImg = "tapToStartImg"
     
     // Game Scene
-    static let gameSceneBackground = "gameSceneBackground"
     static let playerIcon = "playerIcon"
     static let lazer = "lazer"
     static let batteryIcon = "batteryIcon"
@@ -34,7 +37,6 @@ struct ImageNames {
     static let cancelButton = "cancelButton"
     
     // Score Scene
-    static let scoreSceneBackground = "scoreSceneBackground"
     static let scoreBoard = "scoreBoard"
     static let homeButton = "homeButton"
     static let retryButton = "retryButton"
@@ -54,6 +56,7 @@ struct ImagePositions {
 
 struct ZPositions {
     static let sceneBackground: CGFloat = 1
+    static let sceneBackgroundDeco: CGFloat = 2
     
     // hud elements should have the highest priorities
     static let hudBackground: CGFloat = 10

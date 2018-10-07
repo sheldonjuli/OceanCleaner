@@ -21,4 +21,15 @@ extension SKAction {
             ]))
     }
     
+    func fadeInAndOutForever(isFadeInFirst: Bool, duration: TimeInterval) -> SKAction {
+        let fadeIn = SKAction.fadeIn(withDuration: duration)
+        let fadeOut = SKAction.fadeOut(withDuration: duration)
+        
+        if isFadeInFirst {
+            return SKAction.repeatForever(SKAction.sequence([fadeIn, fadeOut]))
+        } else {
+            return SKAction.repeatForever(SKAction.sequence([fadeOut, fadeIn]))
+        }
+    }
+    
 }

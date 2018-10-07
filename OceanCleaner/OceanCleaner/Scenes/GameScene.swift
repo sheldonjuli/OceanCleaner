@@ -109,7 +109,7 @@ class GameScene: SKScene {
      */
     private func addGameSceneBackground(view: SKView) {
         
-        let gameSceneBackground = SpriteKitSceneBackground(view: view, backgroundImageName: ImageNames.gameSceneBackground)
+        let gameSceneBackground = SpriteKitSceneBackground(view: view)
         addChild(gameSceneBackground)
         
     }
