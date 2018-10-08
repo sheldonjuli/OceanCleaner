@@ -67,7 +67,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         setupPhysics()
+        
         addGameSceneBackground(view: view)
+        createCloud(every: 10)
+        
         addPlayerNode(view: view)
         addLazer(view: view)
         addHudLabels(view: view)
@@ -85,9 +88,9 @@ class GameScene: SKScene {
         guard let view = view else { return }
         
         // Remove out of scene objects
-        for oceanObject in children {
-            if oceanObject.position.x < -100 || oceanObject.position.x > view.bounds.maxX + 100 {
-                oceanObject.removeFromParent()
+        for object in children {
+            if object.position.x < -100 || object.position.x > view.bounds.maxX + 100 {
+                object.removeFromParent()
             }
         }
     }
@@ -111,7 +114,16 @@ class GameScene: SKScene {
         
         let gameSceneBackground = SpriteKitSceneBackground(view: view)
         addChild(gameSceneBackground)
+    }
+    
+    private func createCloud(every second: Double) {
         
+        guard let view = view else { return }
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run{ self.addChild(Cloud(in: view)) },
+            SKAction.wait(forDuration: second)
+            ])))
     }
     
     /**

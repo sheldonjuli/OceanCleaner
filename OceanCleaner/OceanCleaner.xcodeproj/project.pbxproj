@@ -23,6 +23,7 @@
 		24275560215AACF300FB7090 /* ScoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427555F215AACF300FB7090 /* ScoreScene.swift */; };
 		2427556B215D6FEF00FB7090 /* OceanObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427556A215D6FEF00FB7090 /* OceanObject.swift */; };
 		2427556D215D71E900FB7090 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2427556C215D71E900FB7090 /* MathHelper.swift */; };
+		24B5B92E216AA36300322226 /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B5B92D216AA36300322226 /* Cloud.swift */; };
 		24CDAD50215FD5860061AD7A /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CDAD4F215FD5860061AD7A /* Bubble.swift */; };
 		24CDAD52215FEE9C0061AD7A /* DrawHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CDAD51215FEE9C0061AD7A /* DrawHelper.swift */; };
 		24D2A85021654E7500EE473A /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D2A84F21654E7500EE473A /* SKActionExtensions.swift */; };
@@ -47,6 +48,7 @@
 		2427555F215AACF300FB7090 /* ScoreScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreScene.swift; sourceTree = "<group>"; };
 		2427556A215D6FEF00FB7090 /* OceanObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OceanObject.swift; sourceTree = "<group>"; };
 		2427556C215D71E900FB7090 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
+		24B5B92D216AA36300322226 /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		24CDAD4F215FD5860061AD7A /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		24CDAD51215FEE9C0061AD7A /* DrawHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHelper.swift; sourceTree = "<group>"; };
 		24D2A84F21654E7500EE473A /* SKActionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				2427555A215AABD000FB7090 /* SpriteKitButton.swift */,
 				2427556A215D6FEF00FB7090 /* OceanObject.swift */,
 				24CDAD4F215FD5860061AD7A /* Bubble.swift */,
+				24B5B92D216AA36300322226 /* Cloud.swift */,
 			);
 			path = CustomNodes;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				24275559215AAB8D00FB7090 /* SpriteKitSceneBackground.swift in Sources */,
 				2427555E215AAC1800FB7090 /* SKNodeExtensions.swift in Sources */,
 				24275560215AACF300FB7090 /* ScoreScene.swift in Sources */,
+				24B5B92E216AA36300322226 /* Cloud.swift in Sources */,
 				2427556D215D71E900FB7090 /* MathHelper.swift in Sources */,
 				24D2A85021654E7500EE473A /* SKActionExtensions.swift in Sources */,
 				2427555B215AABD000FB7090 /* SpriteKitButton.swift in Sources */,

@@ -15,7 +15,7 @@ struct CommonValue {
 struct GamePlayConstant {
     static let maxLevel: Int = 10
     static let maxScoreForLevelCalculation: Int = 30
-    static let startingBatteryNum: Int = 30
+    static let startingBatteryNum: Int = 100
 }
 
 struct ImageNames {
@@ -23,6 +23,7 @@ struct ImageNames {
     // Shared
     static let wave1 = "wave1"
     static let wave2 = "wave2"
+    static let cloud = "cloud"
     static let sceneBackground = "sceneBackground"
     
     // Menu Scene

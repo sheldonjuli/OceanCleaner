@@ -36,6 +36,8 @@ class SpriteKitSceneBackground: SKSpriteNode {
         backgroundNode.yScale = bgScale
         backgroundNode.xScale = bgScale
         
+        addChild(backgroundNode)
+        
         // Scene Decorations
         let wave1 = SKSpriteNode(imageNamed: ImageNames.wave1)
         wave1.anchorPoint = AnchorPoints.sceneBackground
@@ -48,15 +50,13 @@ class SpriteKitSceneBackground: SKSpriteNode {
         wave2.zPosition = ZPositions.sceneBackgroundDeco
         wave2.alpha = 0
 
-        
         // Scale to fit height
         let waveScale = 1.35 * view.bounds.width / wave1.size.width
         wave1.yScale = waveScale
         wave1.xScale = waveScale
         wave2.yScale = waveScale
         wave2.xScale = waveScale
-        
-        addChild(backgroundNode)
+
         addChild(wave1)
         addChild(wave2)
         
