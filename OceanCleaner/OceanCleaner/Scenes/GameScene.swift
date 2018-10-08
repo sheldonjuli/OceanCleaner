@@ -69,7 +69,7 @@ class GameScene: SKScene {
         setupPhysics()
         
         addGameSceneBackground(view: view)
-        createCloud(every: 10)
+        createCloud(every: 20)
         
         addPlayerNode(view: view)
         addLazer(view: view)
@@ -77,7 +77,7 @@ class GameScene: SKScene {
         addScoreChangeNode(view: view)
         
         animateBubble(every: 0.2)
-        createOceanObjects(every: 0.33)
+        createOceanObjects(every: 0.5)
         updateScoreAndGameState(every: 1.0)
         
     }

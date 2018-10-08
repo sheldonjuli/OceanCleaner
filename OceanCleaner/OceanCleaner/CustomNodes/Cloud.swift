@@ -39,8 +39,8 @@ class Cloud: SKSpriteNode {
         position.x = -100
         position.y = randomCGFloat(from: view.bounds.maxY * 0.8, to: view.bounds.maxY * 0.9)
         
-        let lowerSpeed = view.bounds.width / 10
-        let higherSpeed = view.bounds.width / 5
+        let lowerSpeed = view.bounds.width / 40
+        let higherSpeed = view.bounds.width / 20
         physicsBody!.velocity.dx = randomCGFloat(from: lowerSpeed, to: higherSpeed)
         physicsBody!.linearDamping = 0
         
