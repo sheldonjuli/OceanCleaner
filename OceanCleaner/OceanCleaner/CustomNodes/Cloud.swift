@@ -42,6 +42,7 @@ class Cloud: SKSpriteNode {
         let lowerSpeed = view.bounds.width / 10
         let higherSpeed = view.bounds.width / 5
         physicsBody!.velocity.dx = randomCGFloat(from: lowerSpeed, to: higherSpeed)
+        physicsBody!.linearDamping = 0
         
         addChild(cloud)
         

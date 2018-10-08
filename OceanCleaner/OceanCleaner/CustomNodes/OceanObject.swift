@@ -96,6 +96,8 @@ class OceanObject: SKSpriteNode {
             physicsBody!.velocity.dx = randomCGFloat(from: -lowerSpeed, to: -higherSpeed)
         }
         
+        physicsBody!.linearDamping = 0
+        
         addChild(oceanObjectNode)
         
     }
