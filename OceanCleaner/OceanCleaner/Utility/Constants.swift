@@ -15,7 +15,7 @@ struct CommonValue {
 struct GamePlayConstant {
     static let maxLevel: Int = 10
     static let maxScoreForLevelCalculation: Int = 30
-    static let startingBatteryNum: Int = 100
+    static let startingBatteryNum: Int = 10
 }
 
 struct ImageNames {

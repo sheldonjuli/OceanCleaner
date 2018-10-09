@@ -66,10 +66,7 @@ class GameScene: SKScene {
     // MARK: Methods
     override func didMove(to view: SKView) {
         
-        setupPhysics()
-        
-        addGameSceneBackground(view: view)
-        createCloud(every: 20)
+        setupGameScenePhysics()
         
         addPlayerNode(view: view)
         addLazer(view: view)
@@ -96,34 +93,12 @@ class GameScene: SKScene {
     }
     
     /**
-     Setup scene physics.
+     Setup scene physics specific for the game scene.
      */
-    private func setupPhysics() {
+    private func setupGameScenePhysics() {
         
-        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
-    }
-    
-    /**
-     Add gameSceneBackground to the scene.
-     
-     - Parameter view: used for scaling.
-     */
-    private func addGameSceneBackground(view: SKView) {
-        
-        let gameSceneBackground = SpriteKitSceneBackground(view: view)
-        addChild(gameSceneBackground)
-    }
-    
-    private func createCloud(every second: Double) {
-        
-        guard let view = view else { return }
-        
-        self.run(SKAction.repeatForever(SKAction.sequence([
-            SKAction.run{ self.addChild(Cloud(in: view)) },
-            SKAction.wait(forDuration: second)
-            ])))
     }
     
     /**

@@ -28,7 +28,7 @@ class ScoreScene: SKScene {
     override func didMove(to view: SKView) {
         
         saveHighestScore()
-        addBackground(view: view)
+        
         addScoreBoard(view: view)
         addHomeButton(view: view)
         addRetryButton(view: view)
@@ -51,12 +51,6 @@ class ScoreScene: SKScene {
                 break
             }
         }
-    }
-    
-    private func addBackground(view: SKView) {
-        
-        let scoreSceneBackground = SpriteKitSceneBackground(view: view)
-        addChild(scoreSceneBackground)
     }
     
     private func addScoreBoard(view: SKView) {

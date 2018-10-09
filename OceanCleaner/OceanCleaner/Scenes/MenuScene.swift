@@ -26,9 +26,6 @@ class MenuScene: SKScene {
     
     func setupMenu(view: SKView) {
         
-        let menuSceneBackground = SpriteKitSceneBackground(view: view)
-        addChild(menuSceneBackground)
-        
         let noAdsButton = SpriteKitButton(buttonImage: ImageNames.noAdsButton, action: goToInAppPurchase, caseId: 0)
         noAdsButton.position = view.noAdsButtonPosition
         noAdsButton.aspectScale(to: view.bounds.size, regardingWidth: true, multiplier: AspectScaleMultiplier.noAdsButton)

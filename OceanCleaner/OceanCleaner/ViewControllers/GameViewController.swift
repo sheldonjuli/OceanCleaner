@@ -84,12 +84,55 @@ extension GameViewController: SceneManagerDelegate {
             view.presentScene(scene)
             view.ignoresSiblingOrder = true
             
+            setupScene(scene: scene)
+            
             // Debug code
             view.showsFPS = true
             view.showsNodeCount = true
             //view.showsPhysics = true
         }
     }
+    
+    private func setupScene(scene: SKScene) {
+        
+        setupPhysics(scene: scene)
+        addGameSceneBackground(scene: scene)
+        createCloud(scene: scene, every: 20)
+        
+    }
+    
+    /**
+     Setup scene physics which applies to all scenes.
+     */
+    private func setupPhysics(scene: SKScene) {
+        
+        scene.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+
+    }
+    
+    /**
+     Add gameSceneBackground to the scene.
+     
+     - Parameter view: used for scaling.
+     */
+    private func addGameSceneBackground(scene: SKScene) {
+        
+        guard let view = scene.view else { return }
+        
+        let gameSceneBackground = SpriteKitSceneBackground(view: view)
+        scene.addChild(gameSceneBackground)
+    }
+    
+    private func createCloud(scene: SKScene, every second: Double) {
+        
+        guard let view = scene.view else { return }
+        
+        scene.run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run{ scene.addChild(Cloud(in: view)) },
+            SKAction.wait(forDuration: second)
+            ])))
+    }
+    
 }
 
 extension GameViewController: GADBannerViewDelegate {
