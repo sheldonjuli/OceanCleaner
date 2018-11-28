@@ -32,20 +32,13 @@ class MenuScene: SKScene {
         noAdsButton.zPosition = ZPositions.hudLabel
         addChild(noAdsButton)
         
-        let tapToStartNode = SKLabelNode(text: "Tap to Start!")
-        tapToStartNode.fontName = "ChalkboardSE-Bold"
-        tapToStartNode.fontSize = view.bounds.width / 15
+        let tapToStartNode = SKLabelNode(text: "TAP TO START")
+        tapToStartNode.fontName = "PingFang HK"
+        tapToStartNode.fontSize = view.bounds.width / 25
         tapToStartNode.position = view.tapToStartImgPosition
         tapToStartNode.zPosition = ZPositions.hudLabel
         tapToStartNode.fontColor = .white
         addChild(tapToStartNode)
-        
-        let zoomOut = SKAction.scale(by: 1.5, duration: 1)
-        let zoomInAndOut = SKAction.repeatForever(SKAction.sequence([
-            zoomOut,
-            zoomOut.reversed()
-            ]))
-        tapToStartNode.run(zoomInAndOut)
     }
     
     

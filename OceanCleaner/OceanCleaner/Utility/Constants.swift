@@ -136,7 +136,7 @@ extension SKView {
     // Menu Scene
     
     var tapToStartImgPosition: CGPoint {
-        return CGPoint(x: bounds.midX, y: bounds.midY)
+        return CGPoint(x: bounds.midX, y: bounds.maxY * 0.2)
     }
     
     var noAdsButtonPosition: CGPoint {
